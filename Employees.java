@@ -9,26 +9,22 @@ package ooptassignment;
  *
  * @author Kee Seng Pong
  */
-public class Employees {
-    private String name;
+public class Employee {
     private String id;
-    private String pss;
+    private String name;
+    private String dateJoined;
+    private double salary;
+    private String password;
 
-    public Employees() {
+    public Employee(){
+        
     }
-
-    public Employees(String name, String id, String pss) {
-        this.name = name;
+    public Employee(String id, String name, String dateJoined, double salary, String password) {
         this.id = id;
-        this.pss = pss;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
+        this.dateJoined = dateJoined;
+        this.salary = salary;
+        this.password = password;
     }
 
     public String getId() {
@@ -39,13 +35,37 @@ public class Employees {
         this.id = id;
     }
 
-    public String getPss() {
-        return pss;
+    public String getName() {
+        return name;
     }
 
-    public void setPss(String pss) {
-        this.pss = pss;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(String dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
-    
 }
+
