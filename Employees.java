@@ -7,7 +7,7 @@ package ooptassignment;
 
 /**
  *
- * @author Kee Seng Pong
+ * @author Lim Chee Ziong
  */
 public class Employee {
     private String id;
@@ -68,4 +68,3 @@ public class Employee {
     }
     
 }
-
