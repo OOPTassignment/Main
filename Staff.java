@@ -3,87 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Assignment;
+package ooptassignment;
 /**
  *
- * @author Asus
+ * @author Lim Chee Ziong
  */
-public class Staff{
-    private String staffID;
-    private String name;
-    private int dateJoined;
-    private double salary;
-    private String password;
+import java.util.ArrayList;
+public class Staff extends Employee{
+    private static ArrayList<Staff> staffList;
     
     public Staff(){
             
     }
-    public Staff(String staffID, String name, int dateJoined, double salary, String password) {
-        this.staffID = staffID;
-        this.name = name;
-        this.dateJoined = dateJoined;
-        this.salary =salary;
-        this.password = password;
+    public Staff (String staffID, String name, String dateJoined, double salary, String password) {
+        super(staffID,name,dateJoined,salary,password);
     }
 
 
-    public String getPassword() {
-        return password;
+    public static ArrayList<Staff> getStaffList() {
+        return staffList;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    
-    public String getStaffID() {
-        return staffID;
-    }
-
-    public void setStaffID(String staffID) {
-        this.staffID = staffID;
+    public static void setStaffList(ArrayList<Staff> staffList) {
+        Staff.staffList = staffList;
     }
     
-
-    public double getSalary() {
-        return salary;
+    public static void initStaff(){
+        staffList = new ArrayList<>();
+        staffList.add(new Staff("S001", "lee", "23/06/2020", 3000.00, "abc123"));
+        staffList.add(new Staff("S002", "lim", "12/07/2019", 5000.00, "def123"));
+        staffList.add(new Staff("S003", "pee", "1/09/2016", 1000.00, "ghi123"));
     }
-
-    public void setSalary(double basicSalary) {
-        this.salary = basicSalary;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getDateJoined() {
-        return dateJoined;
-    }
-
-    public void setDateJoined(int dateJoined) {
-        this.dateJoined = dateJoined;
-    }
-    
-    
-    @Override
-    public String toString() {
-        return "Staff ID"+ staffID +"\nName: " + name + "\nYear Joined: " + dateJoined + "\nBasic Salary: " + salary + "\n";
-    }
-    
-    public double calculateSalary() {
-        return salary;
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Staff) {
-            return ((Staff)obj).getName().equals(this.getName());
-        } else return false;
-    }
-    
 }
