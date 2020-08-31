@@ -90,7 +90,7 @@ public class StaffDetails {
                     System.out.print("Invalid code entered.\nPlease enter an existing code :");
             }
 
-        }while(selection!=4);
+        }while(selection!=5);
         /*       addS[0] = new Staff("ABC123", "lee", 20201111, 3000.00, "abc123");*/
     }
 
@@ -175,15 +175,13 @@ public class StaffDetails {
             System.out.println("===================================================");
             System.out.println("| 1 | Modify Staff Name ");
             System.out.println("===================================================");
-            System.out.println("| 2 | Modify Date Joined");
+            System.out.println("| 2 | Modify Staff ");
             System.out.println("===================================================");
-            System.out.println("| 3 | Modify Staff ");
+            System.out.println("| 3 | Modify Password ");
             System.out.println("===================================================");
-            System.out.println("| 4 | Modify Password ");
+            System.out.println("| 4 | Save the changes ");
             System.out.println("===================================================");
-            System.out.println("| 5 | Save the changes ");
-            System.out.println("===================================================");
-            System.out.println("| 6 | Exit ");
+            System.out.println("| 5 | Exit ");
             System.out.println("===================================================");
             System.out.print("Enter your selection :");
 
@@ -197,10 +195,6 @@ public class StaffDetails {
                     staffName = scn.nextLine();
                     break;
                 case 2:
-                    System.out.print("Please enter the Date Joined :");
-                    dateJoined = scn.nextLine();
-                    break;
-                case 3:
                     boolean catchDouble;
                     do{
                         System.out.print("Please enter the Salary :");
@@ -217,7 +211,7 @@ public class StaffDetails {
                             System.out.println("Salary must not be negative number !");
                     }while(!(catchDouble) || salary < 0);
                     break;
-                case 4:
+                case 3:
                     boolean limitPw;
                     do{
                         System.out.print("Please set the password :");
@@ -233,7 +227,7 @@ public class StaffDetails {
                         else limitPw=true;
                     }while(!limitPw);
                     break;
-                case 5:
+                case 4:
                     if(!staffName.equals("")){
                         modS.get(i).setName(staffName); 
                     }
@@ -247,12 +241,12 @@ public class StaffDetails {
                         modS.get(i).setPassword(password); 
                     }
                     break;
-                case 6:
+                case 5:
                     return;
                 default :
                     System.out.print("Invalid code entered.\nPlease enter an existing code :");
             }
-        } while(selection!=6);
+        } while(selection!=5);
     }
     
     public static void displayStaff(ArrayList<Staff> staffList){
