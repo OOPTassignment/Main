@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class StaffDetails {
     public static void StaffM() {
         Scanner scn = new Scanner(System.in);
-        Staff.initStaff();
         int selection;
         do{
             System.out.printf("%19s%13s\n","","Staff Details");
@@ -30,7 +29,9 @@ public class StaffDetails {
             System.out.println("===================================================");
             System.out.println("| 3 | Display Staff ");
             System.out.println("===================================================");
-            System.out.println("| 4 | Exit ");
+            System.out.println("| 4 | Delete ");
+            System.out.println("===================================================");
+            System.out.println("| 5 | Exit ");
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
@@ -72,6 +73,18 @@ public class StaffDetails {
                     displayStaff(checkStaff);
                     break;
                 case 4:
+                    char check;
+                    do{
+                        deleteStaff(checkStaff);
+                        System.out.print("Do you want to continue deleting staff(Y/N)?");
+                        check = scn.next().charAt(0);
+                        Character.toUpperCase(check);
+                        if(!(check!='Y'||check!='N')){
+                            System.out.println("Invalid input entered");
+                        }
+                    }while(check=='Y');
+                    break;
+                case 5:
                     return;
                 default :
                     System.out.print("Invalid code entered.\nPlease enter an existing code :");
@@ -254,6 +267,26 @@ public class StaffDetails {
                     , staffList.get(x).getDateJoined()," ", staffList.get(x).getSalary());
         }
         System.out.println("\n");
-        
+    }
+    
+    public static void deleteStaff(ArrayList<Staff> staffList){
+        staffList = Staff.getStaffList();
+        Scanner scn = new Scanner(System.in);
+        String deleteStaff;
+
+        System.out.print("Enter the staff ID wanted to delete : ");
+        deleteStaff = scn.nextLine();
+        int temp = 0;
+        for(int i =0;i<staffList.size();i++){
+         if(staffList.get(i).getId().equals(deleteStaff)){
+             staffList.remove(i);
+             temp=1;
+            System.out.println("Record deleted successfully !");
+            }   
+        }
+        if(temp!=1){
+            System.out.println("ID does not exist ");
+        }
+
     }
 }
