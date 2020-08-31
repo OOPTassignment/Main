@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,6 +15,9 @@ public class ManagerMenu {
 
     public static void main (String [] args){
         Scanner scn = new Scanner(System.in);
+        Staff.initStaff();
+        Product.initProd();
+        Manager.initManager();
         int selection;
         do{
             System.out.printf("%7s%18s\n","","Manager Menu");
@@ -32,7 +36,7 @@ public class ManagerMenu {
             scn.nextLine();//rewind        
             switch (selection) {
                 case 1:
-                    ProductDetails.ProductM();
+                    ProductDetails.ProductM();     
                     break;
                 case 2:
                     StaffDetails.StaffM();
@@ -46,6 +50,7 @@ public class ManagerMenu {
                     System.out.print("Invalid code entered.\nPlease enter an existing code :");
             }
         }while(selection!=4);
+           
     }
 
 }
