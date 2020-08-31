@@ -161,98 +161,100 @@ public class ProductDetails {
         double modKidPrice = -1.00;
         double modAdultPrice = -1.00;
         double modElderPrice = -1.00;
-        System.out.println("===================================================");
-        System.out.println("| 1 | Modify Product Name");
-        System.out.println("===================================================");
-        System.out.println("| 2 | Modify Product Price for Kids");
-        System.out.println("===================================================");
-        System.out.println("| 3 | Modify Product Price for Adults ");
-        System.out.println("===================================================");
-        System.out.println("| 4 | Modify Product Price for Elders ");
-        System.out.println("===================================================");
-        System.out.println("| 5 | Save the changes ");
-        System.out.println("===================================================");
-        System.out.println("| 6 | Exit ");
-        System.out.println("===================================================");
-        System.out.print("Please enter your selection :");
         int selection;
-        boolean catchDouble;
-        selection = scn.nextInt();
-        switch(selection){
-            case 1:
-                System.out.print("Please enter the Name :");
-                modPName = scn.nextLine();
-                break;
-                
-            case 2:
-                do{
-                    System.out.print("Enter the modified product price for Kids :");
-                    try{
-                        modKidPrice = scn.nextDouble();
-                        scn.nextLine();
-                        catchDouble=true;
-                    }catch(Exception ad){
-                        catchDouble=false;
-                        scn.nextLine();
-                        System.out.println("Invalid price entered !");
+        do{
+            System.out.println("===================================================");
+            System.out.println("| 1 | Modify Product Name");
+            System.out.println("===================================================");
+            System.out.println("| 2 | Modify Product Price for Kids");
+            System.out.println("===================================================");
+            System.out.println("| 3 | Modify Product Price for Adults ");
+            System.out.println("===================================================");
+            System.out.println("| 4 | Modify Product Price for Elders ");
+            System.out.println("===================================================");
+            System.out.println("| 5 | Save the changes ");
+            System.out.println("===================================================");
+            System.out.println("| 6 | Exit ");
+            System.out.println("===================================================");
+            System.out.print("Please enter your selection :");
+            boolean catchDouble;
+            selection = scn.nextInt();
+            switch(selection){
+                case 1:
+                    System.out.print("Please enter the Name :");
+                    modPName = scn.nextLine();
+                    break;
+
+                case 2:
+                    do{
+                        System.out.print("Enter the modified product price for Kids :");
+                        try{
+                            modKidPrice = scn.nextDouble();
+                            scn.nextLine();
+                            catchDouble=true;
+                        }catch(Exception ad){
+                            catchDouble=false;
+                            scn.nextLine();
+                            System.out.println("Invalid price entered !");
+                        }
+                        if(modKidPrice < 0)
+                            System.out.println("Price must not be negative number !");
+                    }while(!(catchDouble) || modKidPrice < 0);
+                    break;
+
+                case 3:
+                    do{
+                        System.out.print("Enter the modified product price for Adults :");
+                        try{
+                            modAdultPrice = scn.nextDouble();
+                            scn.nextLine();
+                            catchDouble=true;
+                        }catch(Exception ae){
+                            catchDouble=false;
+                            scn.nextLine();
+                            System.out.println("Invalid price entered !");
+                        }
+                        if(modAdultPrice < 0)
+                            System.out.println("Price must not be negative number !");
+                    }while(!(catchDouble) || modAdultPrice < 0);
+                    break;
+                case 4:
+                    do{
+                        System.out.print("Enter the product price for Elders :");
+                        try{
+                            modElderPrice = scn.nextDouble();
+                            scn.nextLine();
+                            catchDouble=true;
+                        }catch(Exception ae){
+                            catchDouble=false;
+                            scn.nextLine();
+                            System.out.println("Invalid price entered !");
+                        }
+                        if(modElderPrice < 0)
+                            System.out.println("Price must not be negative number !");
+                    }while(!(catchDouble) || modElderPrice < 0);
+                    break;
+                case 5:
+                    if(!modPName.equals("")){
+                            modP.get(i).setProdName(modPName); 
                     }
-                    if(modKidPrice < 0)
-                        System.out.println("Price must not be negative number !");
-                }while(!(catchDouble) || modKidPrice < 0);
-                break;
-                
-            case 3:
-                do{
-                    System.out.print("Enter the modified product price for Adults :");
-                    try{
-                        modAdultPrice = scn.nextDouble();
-                        scn.nextLine();
-                        catchDouble=true;
-                    }catch(Exception ae){
-                        catchDouble=false;
-                        scn.nextLine();
-                        System.out.println("Invalid price entered !");
+                    if(!(modKidPrice == -1.00)){
+                            modP.get(i).setpPriceKids(modKidPrice);
                     }
-                    if(modAdultPrice < 0)
-                        System.out.println("Price must not be negative number !");
-                }while(!(catchDouble) || modAdultPrice < 0);
-                break;
-            case 4:
-                do{
-                    System.out.print("Enter the product price for Elders :");
-                    try{
-                        modElderPrice = scn.nextDouble();
-                        scn.nextLine();
-                        catchDouble=true;
-                    }catch(Exception ae){
-                        catchDouble=false;
-                        scn.nextLine();
-                        System.out.println("Invalid price entered !");
+                    if(!(modElderPrice == -1.00)){
+                            modP.get(i).setpPriceElders(modElderPrice);
                     }
-                    if(modElderPrice < 0)
-                        System.out.println("Price must not be negative number !");
-                }while(!(catchDouble) || modElderPrice < 0);
-            case 5:
-                if(!modPName.equals("")){
-                        modP.get(i).setProdName(modPName); 
-                }
-                if(!(modKidPrice == -1.00)){
-                        modP.get(i).setpPriceKids(modKidPrice);
-                }
-                if(!(modElderPrice == -1.00)){
-                        modP.get(i).setpPriceElders(modElderPrice);
-                }
-                if(!(modAdultPrice == -1.00)){
-                        modP.get(i).setpPriceAdults(modAdultPrice);
-                }
-                break;
-                
-            case 6:
-                return;
-            default :
-                System.out.println("invalid input entered, please choose a number between 1 to 6 only!");
-        }
-        
+                    if(!(modAdultPrice == -1.00)){
+                            modP.get(i).setpPriceAdults(modAdultPrice);
+                    }
+                    break;
+
+                case 6:
+                    return;
+                default :
+                    System.out.println("invalid input entered, please choose a number between 1 to 6 only!");
+            }
+        }while(selection!=6);
     }
     public static void dispProd(ArrayList<Product> checkProd){
         
