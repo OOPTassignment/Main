@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class ProductDetails {
     public static void ProductM() {
         Scanner scn = new Scanner(System.in);
-        Product.initProd();
         int selection;
         do{
             System.out.printf("%18s%15s\n","","Product Details");
@@ -26,7 +25,9 @@ public class ProductDetails {
             System.out.println("===================================================");
             System.out.println("| 3 | Display Product ");
             System.out.println("===================================================");
-            System.out.println("| 4 | Exit ");
+            System.out.println("| 4 | Delete Product ");
+            System.out.println("===================================================");
+            System.out.println("| 5 | Exit ");
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
@@ -42,11 +43,10 @@ public class ProductDetails {
                      System.out.print("Do you want to add more?(Y/N)");
                      addMore=scn.next().charAt(0);
                      Character.toUpperCase(addMore);
-                     if(addMore!='Y'||addMore!='N'){
+                     if(!(addMore=='Y'||addMore=='N')){
                          System.out.println("Invalid input entered");
                      }
                     }while(addMore=='Y');
-                    addProd(checkProd);
                     break;
 
                 case 2:
@@ -67,9 +67,26 @@ public class ProductDetails {
                 case 3:
                     dispProd(checkProd);
                     break;
+                case 4:
+                    char check;
+                    do{
+                        delProd(checkProd);
+                        System.out.print("Do you want to continue deleting product(Y/N)?");
+                        check = scn.next().charAt(0);
+                        Character.toUpperCase(check);
+                        if(!(check!='Y'||check!='N')){
+                            System.out.println("Invalid input entered");
+                        }
+                    }while(check=='Y');
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Invalid input entered");
+                   
             }
 
-        }while(selection!=4);
+        }while(selection!=5);
     }
     
 
@@ -242,16 +259,36 @@ public class ProductDetails {
         checkProd = Product.getProductList();
         System.out.println("");  
         System.out.printf("\n%20sProduct Information\n", "");
-        System.out.printf("|%-20s|%-20s|%-20s|%-20s|","Product Name","Price for Kids","Price for Adults","Price for Elders");
+        System.out.printf("|%-12s|%-20s|%-20s|%-20s|%-20s|","Product ID","Product Name","Price for Kids","Price for Adults","Price for Elders");
         System.out.printf("\n=====================================================================================");
         for(int x = 0; x < checkProd.size(); x++){
-            System.out.printf("\n%s%-20s%s%20.2f%s%20.2f%s%20.2f"," ",checkProd.get(x).getProdName()," ", checkProd.get(x).getpPriceKids()," "
+            System.out.printf("\n%s%-12c%s%-20s%s%20.2f%s%20.2f%s%20.2f"," ",checkProd.get(x).getProductID()," ",checkProd.get(x).getProdName()," ", checkProd.get(x).getpPriceKids()," "
                     , checkProd.get(x).getpPriceAdults()," ", checkProd.get(x).getpPriceElders());
         }
         System.out.println("\n");
-        System.out.printf("\n=====================================================================================");
+        System.out.println("\n=====================================================================================");
     }
+    
+    public static void delProd(ArrayList<Product> checkProd){
+        checkProd = Product.getProductList();
+        Scanner scn = new Scanner(System.in);
+        char deleteID;
 
+        System.out.print("Enter the product ID wanted to delete : ");
+        deleteID = scn.next().charAt(0);
+        int temp = 0;
+        for(int i =0;i<checkProd.size();i++){
+         if(checkProd.get(i).getProductID()== deleteID){
+             checkProd.remove(i);
+             temp=1;
+            System.out.println("Record deleted successfully !");
+            }   
+        }
+        if(temp!=1){
+            System.out.println("ID does not exist ");
+        }
+
+    }
 
         
 }
