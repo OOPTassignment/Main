@@ -16,13 +16,11 @@ public class LoginPage {
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Employees[] empList;
-        empList = new Employees[5];
-        empList[0] = new Staff("kee", "S020", "a123");
-        empList[1] = new Manager("lee", "M011", "12345");
-
+        Employees.initial();
+        Employees[] empList = Employees.getEmpList();
+        
         int tempId = 0;
-        int tempPss = 0;
+        int tempPsw = 0;
         do{
             System.out.println("Welcome! Please log in your id and password");
             System.out.println("To quit the login please enter id \"exit\"");
@@ -35,29 +33,29 @@ public class LoginPage {
             }
 
             System.out.print("Password : ");
-            String pssScan = scan.nextLine();
+            String pswScan = scan.nextLine();
         
             for (Employees emp : empList) {
                 tempId = 0;
-                tempPss = 0;
+                tempPsw = 0;
                 if (emp.getId().equalsIgnoreCase(idScan)) {
                     switch (emp.getId().charAt(0)) {
                         case 'S':
-                            if (emp.getPss().equals(pssScan)) {
+                            if (emp.getPsw().equals(pswScan)) {
                                 System.out.println("Welcome Staff, " + emp.getName());
                                 break;
                             }
                             else{
-                                tempPss++;
+                                tempPsw++;
                             }
                             break;
                         case 'M':
-                            if (emp.getPss().equals(pssScan)) {
+                            if (emp.getPsw().equals(pswScan)) {
                                 System.out.println("Welcome Manager, " + emp.getName());
                                 break;
                             }            
                             else{
-                                tempPss++;
+                                tempPsw++;
                             }
                             break;
                         default:
@@ -65,8 +63,9 @@ public class LoginPage {
                             break;
                     }
                     break;
-                } else {
+                }else {
                     tempId++;
+                    break;
                 }
             }
 
@@ -74,10 +73,10 @@ public class LoginPage {
                 System.out.println("The id entered doesn't exist\n");
             }
 
-            if(tempPss > 0){
+            if(tempPsw > 0){
                 System.out.println("The password entered is invalid\n");
             }
-        }while(tempId > 0 || tempPss > 0);
+        }while(tempId > 0 || tempPsw > 0);
     }
     
 }
