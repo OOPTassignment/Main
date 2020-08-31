@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class ManagerDetails {
     public static void ManagerM() {
         Scanner scn = new Scanner(System.in);
-        Manager.initManager();
         int selection;
         do{
             System.out.printf("%18s%15s\n","","Manager Details");
@@ -30,7 +29,9 @@ public class ManagerDetails {
             System.out.println("===================================================");
             System.out.println("| 3 | Display Manager ");
             System.out.println("===================================================");
-            System.out.println("| 4 | Back to Manager Menu ");
+            System.out.println("| 4 | Delete Manager ");
+            System.out.println("===================================================");
+            System.out.println("| 5 | Back to Manager Menu ");
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
@@ -71,12 +72,24 @@ public class ManagerDetails {
                     displayManager(checkManager);
                     break;
                 case 4:
+                    char check;
+                    do{
+                        deleteManager(checkManager);
+                        System.out.print("Do you want to continue deleting staff(Y/N)?");
+                        check = scn.next().charAt(0);
+                        Character.toUpperCase(check);
+                        if(!(check!='Y'||check!='N')){
+                            System.out.println("Invalid input entered");
+                        }
+                    }while(check=='Y');
+                    break;
+                case 5:
                     return;
                 default :
                     System.out.print("Invalid code entered.\nPlease enter an existing code :");
             }
 
-        }while(selection!=4);
+        }while(selection!=5);
         /*       addM[0] = new Manager("ABC123", "lee", 20201111, 3000.00, "abc123");*/
     }
 
@@ -103,7 +116,7 @@ public class ManagerDetails {
             convertHundred++;
             convertTenth = 0;
         }
-        ManagerID = "S" + convertHundred + convertTenth + convertUnit;
+        ManagerID = "M" + convertHundred + convertTenth + convertUnit;
 
         System.out.print("Please enter the Name :");
         String managerName = scn.nextLine();
@@ -161,15 +174,13 @@ public class ManagerDetails {
             System.out.println("===================================================");
             System.out.println("| 1 | Modify Manager Name ");
             System.out.println("===================================================");
-            System.out.println("| 2 | Modify Date Joined");
+            System.out.println("| 2 | Modify Manager ");
             System.out.println("===================================================");
-            System.out.println("| 3 | Modify Manager ");
+            System.out.println("| 3 | Modify Password ");
             System.out.println("===================================================");
-            System.out.println("| 4 | Modify Password ");
+            System.out.println("| 4 | Save the changes ");
             System.out.println("===================================================");
-            System.out.println("| 5 | Save the changes ");
-            System.out.println("===================================================");
-            System.out.println("| 6 | Exit ");
+            System.out.println("| 5 | Exit ");
             System.out.println("===================================================");
             System.out.print("Enter your selection :");
 
@@ -183,10 +194,6 @@ public class ManagerDetails {
                     managerName = scn.nextLine();
                     break;
                 case 2:
-                    System.out.print("Please enter the Date Joined :");
-                    dateJoined = scn.nextLine();
-                    break;
-                case 3:
                     boolean catchDouble;
                     do{
                         System.out.print("Please enter the Salary :");
@@ -203,7 +210,7 @@ public class ManagerDetails {
                             System.out.println("Salary must not be negative number !");
                     }while(!(catchDouble) || salary < 0);
                     break;
-                case 4:
+                case 3:
                     boolean limitPw;
                     do{
                         System.out.print("Please set the password :");
@@ -219,12 +226,9 @@ public class ManagerDetails {
                         else limitPw=true;
                     }while(!limitPw);
                     break;
-                case 5:
+                case 4:
                     if(!managerName.equals("")){
                         modM.get(i).setName(managerName); 
-                    }
-                    if(!dateJoined.equals("")){
-                        modM.get(i).setDateJoined(dateJoined); 
                     }
                     if(!(salary == -1.00)){
                         modM.get(i).setSalary(salary); 
@@ -233,12 +237,12 @@ public class ManagerDetails {
                         modM.get(i).setPassword(password); 
                     }
                     break;
-                case 6:
+                case 5:
                     return;
                 default :
                     System.out.print("Invalid code entered.\nPlease enter an existing code :");
             }
-        } while(selection!=6);
+        } while(selection!=5);
     }
     
     public static void displayManager(ArrayList<Manager> ManagerList){
@@ -254,5 +258,26 @@ public class ManagerDetails {
         }
         System.out.println("\n");
         
+    }
+    
+    public static void deleteManager(ArrayList<Manager> ManagerList){
+        ManagerList = Manager.getManagerList();
+        Scanner scn = new Scanner(System.in);
+        String deleteManager;
+
+        System.out.print("Enter the manager ID wanted to delete : ");
+        deleteManager = scn.nextLine();
+        int temp = 0;
+        for(int i =0;i<ManagerList.size();i++){
+         if(ManagerList.get(i).getId().equals(deleteManager)){
+             ManagerList.remove(i);
+             temp=1;
+            System.out.println("Record deleted successfully !");
+            }   
+        }
+        if(temp!=1){
+            System.out.println("ID does not exist ");
+        }
+
     }
 }
