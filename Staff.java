@@ -34,4 +34,5 @@ public class Staff extends Employee{
         staffList.add(new Staff("S002", "lim", "12/07/2019", 5000.00, "def123"));
         staffList.add(new Staff("S003", "pee", "1/09/2016", 1000.00, "ghi123"));
     }
+
 }

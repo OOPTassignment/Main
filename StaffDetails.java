@@ -19,7 +19,9 @@ import java.util.ArrayList;
 public class StaffDetails {
     public static void StaffM() {
         Scanner scn = new Scanner(System.in);
-        int selection;
+        int selection=0;
+        ArrayList<Staff> checkStaff = Staff.getStaffList();
+        boolean catchInt;
         do{
             System.out.printf("%19s%13s\n","","Staff Details");
             System.out.println("===================================================");
@@ -35,62 +37,69 @@ public class StaffDetails {
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
-            selection = scn.nextInt();
-            scn.nextLine();//rewind
-            ArrayList<Staff> checkStaff = Staff.getStaffList();
             
-            switch (selection) {
-                case 1:
-                    char addMore;
-                    do{
-                     addNewStaff(checkStaff);
-                     System.out.print("Do you want to add more?(Y/N)");
-                     addMore=scn.next().charAt(0);
-                     Character.toUpperCase(addMore);
-                     if(addMore!='Y'||addMore!='N'){
-                         System.out.println("Invalid input entered");
-                     }
-                    }while(addMore=='Y');
-                    break;
-                    
+            try{
+                selection = scn.nextInt();
+                scn.nextLine();//rewind
+                catchInt=true;
+                switch (selection) {
+                    case 1:
+                        char addMore;
+                        do{
+                         addNewStaff(checkStaff);
+                         System.out.print("Do you want to add more?(Y/N)");
+                         addMore=scn.next().charAt(0);
+                         Character.toUpperCase(addMore);
+                         if(addMore!='Y'||addMore!='N'){
+                             System.out.println("Invalid input entered");
+                         }
+                        }while(addMore=='Y');
+                        break;
 
-                case 2:
-                    System.out.print("Please enter the staff ID :");
 
-                    String inputID = scn.nextLine();
-                    for (int i = 0; i <checkStaff.size();i++) {
-                        if (inputID.equals(checkStaff.get(i).getId()) ) {
-                            ModStaff(checkStaff, i,inputID);
-                            break;
+                    case 2:
+                        System.out.print("Please enter the staff ID :");
+
+                        String inputID = scn.nextLine();
+                        for (int i = 0; i <checkStaff.size();i++) {
+                            if (inputID.equals(checkStaff.get(i).getId()) ) {
+                                ModStaff(checkStaff, i,inputID);
+                                break;
+                            }
+                            else {
+                                System.out.println("ID is not registered.");
+                                break;
+                            }
                         }
-                        else {
-                            System.out.println("ID is not registered.");
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    displayStaff(checkStaff);
-                    break;
-                case 4:
-                    char check;
-                    do{
-                        deleteStaff(checkStaff);
-                        System.out.print("Do you want to continue deleting staff(Y/N)?");
-                        check = scn.next().charAt(0);
-                        Character.toUpperCase(check);
-                        if(!(check!='Y'||check!='N')){
-                            System.out.println("Invalid input entered");
-                        }
-                    }while(check=='Y');
-                    break;
-                case 5:
-                    return;
-                default :
-                    System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                        break;
+                    case 3:
+                        displayStaff(checkStaff);
+                        break;
+                    case 4:
+                        char check;
+                        do{
+                            deleteStaff(checkStaff);
+                            System.out.print("Do you want to continue deleting staff(Y/N)?");
+                            check = scn.next().charAt(0);
+                            Character.toUpperCase(check);
+                            if(!(check!='Y'||check!='N')){
+                                System.out.println("Invalid input entered");
+                            }
+                        }while(check=='Y');
+                        break;
+                    case 5:
+                        return;
+                    default :
+                        System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                }
+            }catch(Exception ab){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid selection entered !");
             }
+            
 
-        }while(selection!=5);
+        }while(selection!=5 || catchInt==false);
         /*       addS[0] = new Staff("ABC123", "lee", 20201111, 3000.00, "abc123");*/
     }
 
@@ -165,12 +174,13 @@ public class StaffDetails {
         LocalDate memDate = LocalDate.now();
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Scanner scn = new Scanner(System.in);
-        int selection;
+        int selection=0;
         String staffName="";
         String dateJoined = "";
         double salary=-1.00;
         String password="";
         String staffID= inputID;
+        boolean catchInt;
         do{
             System.out.println("===================================================");
             System.out.println("| 1 | Modify Staff Name ");
@@ -185,68 +195,73 @@ public class StaffDetails {
             System.out.println("===================================================");
             System.out.print("Enter your selection :");
 
-            selection = scn.nextInt();
-            scn.nextLine();
-        
-        
-            switch(selection){
-                case 1:
-                    System.out.print("Please enter the Name :");
-                    staffName = scn.nextLine();
-                    break;
-                case 2:
-                    boolean catchDouble;
-                    do{
-                        System.out.print("Please enter the Salary :");
-                        try{
-                            salary = scn.nextDouble();
-                            scn.nextLine();
-                            catchDouble=true;
-                        }catch(Exception ac){
-                            catchDouble=false;
-                            scn.nextLine();
-                            System.out.println("Invalid salary entered !");
+            try{
+                selection = scn.nextInt();
+                scn.nextLine();
+                catchInt=true;
+                switch(selection){
+                    case 1:
+                        System.out.print("Please enter the Name :");
+                        staffName = scn.nextLine();
+                        break;
+                    case 2:
+                        boolean catchDouble;
+                        do{
+                            System.out.print("Please enter the Salary :");
+                            try{
+                                salary = scn.nextDouble();
+                                scn.nextLine();
+                                catchDouble=true;
+                            }catch(Exception ac){
+                                catchDouble=false;
+                                scn.nextLine();
+                                System.out.println("Invalid salary entered !");
+                            }
+                            if(salary < 0)
+                                System.out.println("Salary must not be negative number !");
+                        }while(!(catchDouble) || salary < 0);
+                        break;
+                    case 3:
+                        boolean limitPw;
+                        do{
+                            System.out.print("Please set the password :");
+                            password = scn.nextLine();
+                            if(password.length()>=19){
+                                System.out.println("Password can only have 18 characters");
+                                limitPw = false;
+                            }
+                            else if((password.equals(""))||(password.length()<8)){
+                                System.out.println("Password must have at least 8 characters");
+                                limitPw = false;
+                            }
+                            else limitPw=true;
+                        }while(!limitPw);
+                        break;
+                    case 4:
+                        if(!staffName.equals("")){
+                            modS.get(i).setName(staffName); 
                         }
-                        if(salary < 0)
-                            System.out.println("Salary must not be negative number !");
-                    }while(!(catchDouble) || salary < 0);
-                    break;
-                case 3:
-                    boolean limitPw;
-                    do{
-                        System.out.print("Please set the password :");
-                        password = scn.nextLine();
-                        if(password.length()>=19){
-                            System.out.println("Password can only have 18 characters");
-                            limitPw = false;
+                        if(!dateJoined.equals("")){
+                            modS.get(i).setDateJoined(dateJoined); 
                         }
-                        else if((password.equals(""))||(password.length()<8)){
-                            System.out.println("Password must have at least 8 characters");
-                            limitPw = false;
+                        if(!(salary == -1.00)){
+                            modS.get(i).setSalary(salary); 
                         }
-                        else limitPw=true;
-                    }while(!limitPw);
-                    break;
-                case 4:
-                    if(!staffName.equals("")){
-                        modS.get(i).setName(staffName); 
-                    }
-                    if(!dateJoined.equals("")){
-                        modS.get(i).setDateJoined(dateJoined); 
-                    }
-                    if(!(salary == -1.00)){
-                        modS.get(i).setSalary(salary); 
-                    }
-                    if(!password.equals("")){
-                        modS.get(i).setPassword(password); 
-                    }
-                    break;
-                case 5:
-                    return;
-                default :
-                    System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                        if(!password.equals("")){
+                            modS.get(i).setPassword(password); 
+                        }
+                        break;
+                    case 5:
+                        return;
+                    default :
+                        System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                }
+            }catch(Exception ac){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid salary entered !");
             }
-        } while(selection!=5);
+        } while(selection!=5 || catchInt==false);
     }
     
     public static void displayStaff(ArrayList<Staff> staffList){

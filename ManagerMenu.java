@@ -18,7 +18,8 @@ public class ManagerMenu {
         Staff.initStaff();
         Product.initProd();
         Manager.initManager();
-        int selection;
+        boolean catchInt;
+        int selection=0;
         do{
             System.out.printf("%7s%18s\n","","Manager Menu");
             System.out.println("===================================================");
@@ -32,24 +33,31 @@ public class ManagerMenu {
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
-            selection = scn.nextInt();
-            scn.nextLine();//rewind        
-            switch (selection) {
-                case 1:
-                    ProductDetails.ProductM();     
-                    break;
-                case 2:
-                    StaffDetails.StaffM();
-                    break;
-                case 3:
-                    ManagerDetails.ManagerM();
-                    break;
-                case 4:
-                    return;
-                default:
-                    System.out.print("Invalid code entered.\nPlease enter an existing code :");
+            try{
+                selection = scn.nextInt();
+                scn.nextLine();//rewind  
+                catchInt=true;
+                switch (selection) {
+                    case 1:
+                        ProductDetails.ProductM();     
+                        break;
+                    case 2:
+                        StaffDetails.StaffM();
+                        break;
+                    case 3:
+                        ManagerDetails.ManagerM();
+                        break;
+                    case 4:
+                        return;
+                    default:
+                        System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                }
+            }catch(Exception ac){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid selection entered !");
             }
-        }while(selection!=4);
+        }while(selection!=4 || catchInt==false);
            
     }
 

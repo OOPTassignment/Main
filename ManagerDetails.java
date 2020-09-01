@@ -19,7 +19,9 @@ import java.util.ArrayList;
 public class ManagerDetails {
     public static void ManagerM() {
         Scanner scn = new Scanner(System.in);
-        int selection;
+        ArrayList<Manager> checkManager = Manager.getManagerList();
+        int selection=0;
+        boolean catchInt;
         do{
             System.out.printf("%18s%15s\n","","Manager Details");
             System.out.println("===================================================");
@@ -35,61 +37,68 @@ public class ManagerDetails {
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
-            selection = scn.nextInt();
-            scn.nextLine();//rewind
-            ArrayList<Manager> checkManager = Manager.getManagerList();
-            
-            switch (selection) {
-                case 1:
-                    char addMore;
-                    do{
-                     addNewManager(checkManager);
-                     System.out.print("Do you want to add more?(Y/N)");
-                     addMore=scn.next().charAt(0);
-                     Character.toUpperCase(addMore);
-                    if(addMore!='Y'||addMore!='N'){
-                         System.out.println("Invalid input entered");
-                     }
-                    }while(addMore=='Y');
-                    break;
+            try{
+                selection = scn.nextInt();
+                scn.nextLine();//rewind
+                catchInt=true;
+                switch (selection) {
+                    case 1:
+                        char addMore;
+                        do{
+                         addNewManager(checkManager);
+                         System.out.print("Do you want to add more?(Y/N)");
+                         addMore=scn.next().charAt(0);
+                         Character.toUpperCase(addMore);
+                        if(addMore!='Y'||addMore!='N'){
+                             System.out.println("Invalid input entered");
+                         }
+                        }while(addMore=='Y');
+                        break;
 
-                case 2:
-                    System.out.print("Please enter the Manager ID :");
+                    case 2:
+                        System.out.print("Please enter the Manager ID :");
 
-                    String inputID = scn.nextLine();
-                    for (int i = 0; i <checkManager.size();i++) {
-                        if (inputID.equals(checkManager.get(i).getId()) ) {
-                            ModManager(checkManager, i,inputID);
-                            break;
+                        String inputID = scn.nextLine();
+                        for (int i = 0; i <checkManager.size();i++) {
+                            if (inputID.equals(checkManager.get(i).getId()) ) {
+                                ModManager(checkManager, i,inputID);
+                                break;
+                            }
+                            else {
+                                System.out.println("ID is not registered.");
+                                break;
+                            }
                         }
-                        else {
-                            System.out.println("ID is not registered.");
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    displayManager(checkManager);
-                    break;
-                case 4:
-                    char check;
-                    do{
-                        deleteManager(checkManager);
-                        System.out.print("Do you want to continue deleting staff(Y/N)?");
-                        check = scn.next().charAt(0);
-                        Character.toUpperCase(check);
-                        if(!(check!='Y'||check!='N')){
-                            System.out.println("Invalid input entered");
-                        }
-                    }while(check=='Y');
-                    break;
-                case 5:
-                    return;
-                default :
-                    System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                        break;
+                    case 3:
+                        displayManager(checkManager);
+                        break;
+                    case 4:
+                        char check;
+                        do{
+                            deleteManager(checkManager);
+                            System.out.print("Do you want to continue deleting staff(Y/N)?");
+                            check = scn.next().charAt(0);
+                            Character.toUpperCase(check);
+                            if(!(check!='Y'||check!='N')){
+                                System.out.println("Invalid input entered");
+                            }
+                        }while(check=='Y');
+                        break;
+                    case 5:
+                        return;
+                    default :
+                        System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                }
+
+            }catch(Exception ab){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid salary entered !");
             }
-
-        }while(selection!=5);
+            
+            
+        }while(selection!=5 || catchInt==false);
         /*       addM[0] = new Manager("ABC123", "lee", 20201111, 3000.00, "abc123");*/
     }
 
@@ -161,15 +170,13 @@ public class ManagerDetails {
     }
 
     public static void ModManager(ArrayList<Manager> modM, int i, String inputID) {
-        LocalDate memDate = LocalDate.now();
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Scanner scn = new Scanner(System.in);
-        int selection;
+        int selection=0;
         String managerName="";
-        String dateJoined = "";
         double salary=-1.00;
         String password="";
         String managerID= inputID;
+        boolean catchInt;
         do{
             System.out.println("===================================================");
             System.out.println("| 1 | Modify Manager Name ");
@@ -184,65 +191,73 @@ public class ManagerDetails {
             System.out.println("===================================================");
             System.out.print("Enter your selection :");
 
-            selection = scn.nextInt();
-            scn.nextLine();
-        
-        
-            switch(selection){
-                case 1:
-                    System.out.print("Please enter the Name :");
-                    managerName = scn.nextLine();
-                    break;
-                case 2:
-                    boolean catchDouble;
-                    do{
-                        System.out.print("Please enter the Salary :");
-                        try{
-                            salary = scn.nextDouble();
-                            scn.nextLine();
-                            catchDouble=true;
-                        }catch(Exception ac){
-                            catchDouble=false;
-                            scn.nextLine();
-                            System.out.println("Invalid salary entered !");
+
+            try{
+                selection = scn.nextInt();
+                scn.nextLine();
+                catchInt=true;
+                switch(selection){
+                    case 1:
+                        System.out.print("Please enter the Name :");
+                        managerName = scn.nextLine();
+                        break;
+                    case 2:
+                        boolean catchDouble;
+                        do{
+                            System.out.print("Please enter the Salary :");
+                            try{
+                                salary = scn.nextDouble();
+                                scn.nextLine();
+                                catchDouble=true;
+                            }catch(Exception ac){
+                                catchDouble=false;
+                                scn.nextLine();
+                                System.out.println("Invalid salary entered !");
+                            }
+                            if(salary < 0)
+                                System.out.println("Salary must not be negative number !");
+                        }while(!(catchDouble) || salary < 0);
+                        break;
+                    case 3:
+                        boolean limitPw;
+                        do{
+                            System.out.print("Please set the password :");
+                            password = scn.nextLine();
+                            if(password.length()>=19){
+                                System.out.println("Password can only have 18 characters");
+                                limitPw = false;
+                            }
+                            else if((password.equals(""))||(password.length()<8)){
+                                System.out.println("Password must have at least 8 characters");
+                                limitPw = false;
+                            }
+                            else limitPw=true;
+                        }while(!limitPw);
+                        break;
+                    case 4:
+                        if(!managerName.equals("")){
+                            modM.get(i).setName(managerName); 
                         }
-                        if(salary < 0)
-                            System.out.println("Salary must not be negative number !");
-                    }while(!(catchDouble) || salary < 0);
-                    break;
-                case 3:
-                    boolean limitPw;
-                    do{
-                        System.out.print("Please set the password :");
-                        password = scn.nextLine();
-                        if(password.length()>=19){
-                            System.out.println("Password can only have 18 characters");
-                            limitPw = false;
+                        if(!(salary == -1.00)){
+                            modM.get(i).setSalary(salary); 
                         }
-                        else if((password.equals(""))||(password.length()<8)){
-                            System.out.println("Password must have at least 8 characters");
-                            limitPw = false;
+                        if(!password.equals("")){
+                            modM.get(i).setPassword(password); 
                         }
-                        else limitPw=true;
-                    }while(!limitPw);
-                    break;
-                case 4:
-                    if(!managerName.equals("")){
-                        modM.get(i).setName(managerName); 
-                    }
-                    if(!(salary == -1.00)){
-                        modM.get(i).setSalary(salary); 
-                    }
-                    if(!password.equals("")){
-                        modM.get(i).setPassword(password); 
-                    }
-                    break;
-                case 5:
-                    return;
-                default :
-                    System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                        break;
+                    case 5:
+                        return;
+                    default :
+                        System.out.print("Invalid code entered.\nPlease enter an existing code :");
+                }
+            }catch(Exception ab){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid selection entered !");
             }
-        } while(selection!=5);
+        
+            
+        } while(selection!=5 || catchInt==false);
     }
     
     public static void displayManager(ArrayList<Manager> ManagerList){

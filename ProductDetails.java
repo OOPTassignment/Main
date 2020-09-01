@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class ProductDetails {
     public static void ProductM() {
         Scanner scn = new Scanner(System.in);
-        int selection;
+        int selection=0;
+        boolean catchInt;
+        ArrayList<Product> checkProd = Product.getProductList();
         do{
             System.out.printf("%18s%15s\n","","Product Details");
             System.out.println("===================================================");
@@ -31,11 +33,12 @@ public class ProductDetails {
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
-            selection = scn.nextInt();
-            scn.nextLine();//rewind
-            ArrayList<Product> checkProd = Product.getProductList();
-            
-            switch (selection) {
+            //rewind
+             try{
+                selection = scn.nextInt();
+                scn.nextLine();
+                catchInt=true;
+                switch (selection) {
                 case 1:
                     char addMore;
                     do{
@@ -82,11 +85,15 @@ public class ProductDetails {
                 case 5:
                     return;
                 default:
-                    System.out.println("Invalid input entered");
-                   
+                    System.out.println("\n");
+                    break;
             }
-
-        }while(selection!=5);
+            }catch(Exception ad){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid selection entered !");
+            }
+        }while(selection!=5 || catchInt==false);
     }
     
 
@@ -161,7 +168,8 @@ public class ProductDetails {
         double modKidPrice = -1.00;
         double modAdultPrice = -1.00;
         double modElderPrice = -1.00;
-        int selection;
+        int selection=0;
+        boolean catchInt;
         do{
             System.out.println("===================================================");
             System.out.println("| 1 | Modify Product Name");
@@ -178,83 +186,93 @@ public class ProductDetails {
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             boolean catchDouble;
-            selection = scn.nextInt();
-            switch(selection){
-                case 1:
-                    System.out.print("Please enter the Name :");
-                    modPName = scn.nextLine();
-                    break;
+            
+            try{
+                selection = scn.nextInt();
+                scn.nextLine();
+                catchInt=true;
+                switch(selection){
+                    case 1:
+                        System.out.print("Please enter the Name :");
+                        modPName = scn.nextLine();
+                        break;
 
-                case 2:
-                    do{
-                        System.out.print("Enter the modified product price for Kids :");
-                        try{
-                            modKidPrice = scn.nextDouble();
-                            scn.nextLine();
-                            catchDouble=true;
-                        }catch(Exception ad){
-                            catchDouble=false;
-                            scn.nextLine();
-                            System.out.println("Invalid price entered !");
-                        }
-                        if(modKidPrice < 0)
-                            System.out.println("Price must not be negative number !");
-                    }while(!(catchDouble) || modKidPrice < 0);
-                    break;
+                    case 2:
+                        do{
+                            System.out.print("Enter the modified product price for Kids :");
+                            try{
+                                modKidPrice = scn.nextDouble();
+                                scn.nextLine();
+                                catchDouble=true;
+                            }catch(Exception ad){
+                                catchDouble=false;
+                                scn.nextLine();
+                                System.out.println("Invalid price entered !");
+                            }
+                            if(modKidPrice < 0)
+                                System.out.println("Price must not be negative number !");
+                        }while(!(catchDouble) || modKidPrice < 0);
+                        break;
 
-                case 3:
-                    do{
-                        System.out.print("Enter the modified product price for Adults :");
-                        try{
-                            modAdultPrice = scn.nextDouble();
-                            scn.nextLine();
-                            catchDouble=true;
-                        }catch(Exception ae){
-                            catchDouble=false;
-                            scn.nextLine();
-                            System.out.println("Invalid price entered !");
+                    case 3:
+                        do{
+                            System.out.print("Enter the modified product price for Adults :");
+                            try{
+                                modAdultPrice = scn.nextDouble();
+                                scn.nextLine();
+                                catchDouble=true;
+                            }catch(Exception ae){
+                                catchDouble=false;
+                                scn.nextLine();
+                                System.out.println("Invalid price entered !");
+                            }
+                            if(modAdultPrice < 0)
+                                System.out.println("Price must not be negative number !");
+                        }while(!(catchDouble) || modAdultPrice < 0);
+                        break;
+                    case 4:
+                        do{
+                            System.out.print("Enter the product price for Elders :");
+                            try{
+                                modElderPrice = scn.nextDouble();
+                                scn.nextLine();
+                                catchDouble=true;
+                            }catch(Exception ae){
+                                catchDouble=false;
+                                scn.nextLine();
+                                System.out.println("Invalid price entered !");
+                            }
+                            if(modElderPrice < 0)
+                                System.out.println("Price must not be negative number !");
+                        }while(!(catchDouble) || modElderPrice < 0);
+                        break;
+                    case 5:
+                        if(!modPName.equals("")){
+                                modP.get(i).setProdName(modPName); 
                         }
-                        if(modAdultPrice < 0)
-                            System.out.println("Price must not be negative number !");
-                    }while(!(catchDouble) || modAdultPrice < 0);
-                    break;
-                case 4:
-                    do{
-                        System.out.print("Enter the product price for Elders :");
-                        try{
-                            modElderPrice = scn.nextDouble();
-                            scn.nextLine();
-                            catchDouble=true;
-                        }catch(Exception ae){
-                            catchDouble=false;
-                            scn.nextLine();
-                            System.out.println("Invalid price entered !");
+                        if(!(modKidPrice == -1.00)){
+                                modP.get(i).setpPriceKids(modKidPrice);
                         }
-                        if(modElderPrice < 0)
-                            System.out.println("Price must not be negative number !");
-                    }while(!(catchDouble) || modElderPrice < 0);
-                    break;
-                case 5:
-                    if(!modPName.equals("")){
-                            modP.get(i).setProdName(modPName); 
-                    }
-                    if(!(modKidPrice == -1.00)){
-                            modP.get(i).setpPriceKids(modKidPrice);
-                    }
-                    if(!(modElderPrice == -1.00)){
-                            modP.get(i).setpPriceElders(modElderPrice);
-                    }
-                    if(!(modAdultPrice == -1.00)){
-                            modP.get(i).setpPriceAdults(modAdultPrice);
-                    }
-                    break;
+                        if(!(modElderPrice == -1.00)){
+                                modP.get(i).setpPriceElders(modElderPrice);
+                        }
+                        if(!(modAdultPrice == -1.00)){
+                                modP.get(i).setpPriceAdults(modAdultPrice);
+                        }
+                        break;
 
-                case 6:
-                    return;
-                default :
-                    System.out.println("invalid input entered, please choose a number between 1 to 6 only!");
+                    case 6:
+                        return;
+                    default :
+                        System.out.println("invalid input entered, please choose a number between 1 to 6 only!");
+                }
+            }catch(Exception ae){
+                catchInt=false;
+                scn.nextLine();
+                System.out.println("Invalid selection entered !");
             }
-        }while(selection!=6);
+            
+        }while(selection!=6 || catchInt==false);
     }
     public static void dispProd(ArrayList<Product> checkProd){
         
