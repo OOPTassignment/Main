@@ -55,7 +55,7 @@ public class StaffMainMenu {
                    break;
                 case 7: 
                     System.out.println("Loging out to of staff menu...");
-                    break;
+                    return;
                 default:
                     System.out.println("That wasn't a choice...");
            }
