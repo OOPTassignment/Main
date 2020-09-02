@@ -15,7 +15,7 @@ public class StaffMainMenu {
         SearchTheTable option3 = new SearchTheTable();
         Membership option4 = new Membership();
         Bills option5 = new Bills();
-        optionSix option6 = new optionSix();
+        //optionSix option6 = new optionSix();
         
         int choice = 0;
         
