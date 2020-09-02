@@ -1,3 +1,5 @@
+package ooptassignment;
+
 import java.util.Scanner;
 import java.util.Scanner;
 import java.text.DateFormat;
@@ -728,3 +730,4 @@ public class Bills{
         }
     }
 }
+
