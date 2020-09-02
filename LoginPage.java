@@ -21,13 +21,14 @@ public class LoginPage {
         Staff.initStaff();
         ArrayList<Manager> managerList = Manager.getManagerList();
         ArrayList<Staff> staffList = Staff.getStaffList();
+        String idScan;
         
         int temp = 0;
         do{
             System.out.println("Welcome! Please log in your id and password");
             System.out.println("To quit the login please enter id \"exit\"");
             System.out.print("User ID : ");
-            String idScan = scan.nextLine();
+            idScan = scan.nextLine();
 
             if(idScan.equalsIgnoreCase("exit")){
                 System.out.println("Exit Succesfully...");
@@ -70,7 +71,7 @@ public class LoginPage {
             if(temp > 0){
                 System.out.println("The account entered is invalid\n");
             }
-        }while(temp > 0);
+        }while(temp > 0 || !(idScan.equalsIgnoreCase("exit")));
     }
     
 }
