@@ -1,3 +1,5 @@
+package ooptassignment;
+
 public class tables{
     private int tableNo;
     private String occupy;

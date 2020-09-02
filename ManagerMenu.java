@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class ManagerMenu {
 
-    public static void main (String [] args){
+    public void ManagerMenu (){
         Scanner scn = new Scanner(System.in);
         Staff.initStaff();
         Product.initProd();

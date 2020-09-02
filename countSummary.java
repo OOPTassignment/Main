@@ -1,3 +1,5 @@
+package ooptassignment;
+
 public class countSummary {
     private int countAdult;  //head
     private int countKid;

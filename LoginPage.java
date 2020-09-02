@@ -10,17 +10,19 @@ package ooptassignment;
  * @author Kee Seng Pong
  */
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class LoginPage {
 
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Employees.initial();
-        Employees[] empList = Employees.getEmpList();
+        Manager.initManager();
+        Staff.initStaff();
+        ArrayList<Manager> managerList = Manager.getManagerList();
+        ArrayList<Staff> staffList = Staff.getStaffList();
         
-        int tempId = 0;
-        int tempPsw = 0;
+        int temp = 0;
         do{
             System.out.println("Welcome! Please log in your id and password");
             System.out.println("To quit the login please enter id \"exit\"");
@@ -32,51 +34,43 @@ public class LoginPage {
                 System.exit(0);
             }
 
+
             System.out.print("Password : ");
             String pswScan = scan.nextLine();
         
-            for (Employees emp : empList) {
-                tempId = 0;
-                tempPsw = 0;
-                if (emp.getId().equalsIgnoreCase(idScan)) {
-                    switch (emp.getId().charAt(0)) {
-                        case 'S':
-                            if (emp.getPsw().equals(pswScan)) {
-                                System.out.println("Welcome Staff, " + emp.getName());
-                                break;
-                            }
-                            else{
-                                tempPsw++;
-                            }
-                            break;
-                        case 'M':
-                            if (emp.getPsw().equals(pswScan)) {
-                                System.out.println("Welcome Manager, " + emp.getName());
-                                break;
-                            }            
-                            else{
-                                tempPsw++;
-                            }
-                            break;
-                        default:
-                            tempId++;
-                            break;
+            for (int i = 0, j = 0; i < managerList.size() && j < staffList.size(); i++, j++) {
+                temp = 0;
+                if (managerList.get(i).getId().equalsIgnoreCase(idScan)) {
+                    if (managerList.get(i).getPassword().equals(pswScan)) {
+                        System.out.println("Welcome Manager, " + managerList.get(i).getName());
+                        ManagerMenu managerModule = new ManagerMenu();
+                        managerModule.ManagerMenu();
+                        break;
+                    }            
+                    else{
+                        temp++;
+                        break;
                     }
-                    break;
-                }else {
-                    tempId++;
-                    break;
-                }
+                       
+                }else if(staffList.get(j).getId().equalsIgnoreCase(idScan)) {
+                    if (staffList.get(j).getPassword().equals(pswScan)) {
+                        System.out.println("Welcome Staff, " + staffList.get(j).getName());
+                        StaffMainMenu staffModule = new StaffMainMenu();
+                        staffModule.StaffMenu();
+                        break;
+                    }
+                    else{
+                        temp++;
+                        break;
+                    }        
+                }else
+                    temp++;
             }
-
-            if(tempId > 0){
-                System.out.println("The id entered doesn't exist\n");
+            
+            if(temp > 0){
+                System.out.println("The account entered is invalid\n");
             }
-
-            if(tempPsw > 0){
-                System.out.println("The password entered is invalid\n");
-            }
-        }while(tempId > 0 || tempPsw > 0);
+        }while(temp > 0);
     }
     
 }

@@ -1,3 +1,6 @@
+
+package ooptassignment;
+
 import java.util.Scanner;
 //show all the current table
 public class SearchTheTable {

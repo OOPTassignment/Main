@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class Membership extends Member{
     
     
-    public static void main (String[] args){
+    public void Membership (){
         Scanner scan = new Scanner(System.in);
         initial();
         

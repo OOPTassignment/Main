@@ -10,7 +10,7 @@ package ooptassignment;
  * @author Lim Chee Ziong
  */
 import java.util.ArrayList;
-public class Manager extends Employee{
+public class Manager extends Employees{
     private static ArrayList<Manager> ManagerList;
     
     public Manager(){
@@ -20,7 +20,6 @@ public class Manager extends Employee{
         super(managerID,name,dateJoined,salary,password);
     }
     
-
 
     public static ArrayList<Manager> getManagerList() {
         return ManagerList;

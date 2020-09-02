@@ -9,17 +9,17 @@ package ooptassignment;
  *
  * @author Lim Chee Ziong
  */
-public class Employee {
+public class Employees {
     private String id;
     private String name;
     private String dateJoined;
     private double salary;
     private String password;
 
-    public Employee(){
+    public Employees(){
         
     }
-    public Employee(String id, String name, String dateJoined, double salary, String password) {
+    public Employees(String id, String name, String dateJoined, double salary, String password) {
         this.id = id;
         this.name = name;
         this.dateJoined = dateJoined;
