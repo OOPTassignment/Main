@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class OOPTAssignment {
+public class StaffMainMenu {
     
     public static void main(String[] args) {
         //creates array
@@ -19,7 +19,7 @@ public class OOPTAssignment {
         
         Scanner scan = new Scanner(System.in);
         
-        while (choice != 6){
+        while (choice != 7){
             System.out.println("\tStaff Module"
                                 + "\n1.Open Table"
                                 + "\n2.Edit Table"
@@ -49,8 +49,11 @@ public class OOPTAssignment {
                    Bills.Billing(allTable, summarying);
                    break;
                 case 6:
-                   option6.logout();
+                   
                    break;
+                case 7: 
+                    System.out.println("Loging out to of staff menu...");
+                    break;
                 default:
                     System.out.println("That wasn't a choice...");
            }
