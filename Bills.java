@@ -14,7 +14,7 @@ public class Bills{
     {
         Scanner scan = new Scanner(System.in);
         Product.initProd();
-        ArrayList<Product> ProductList = Product.getProductList();
+        ArrayList<Product> ProductList = Product.getProductList(); //CZ PART for updating the product 
         ArrayList<Member> MemberList = Member.getMemberList();
         if(table[0] == null){
                 for(int i = 0; i < 15; i++){
@@ -40,8 +40,8 @@ public class Bills{
         //Enter table number   
         int scanTableNumber = 0;
         char confirm;
-        boolean no, notEmpty, quitBill;
-        String checkEmpty;        
+        boolean no, notEmpty, notBooking, quitBill;
+        String checkEmpty, checkBooking = "";        
         do{
             do{
                 System.out.print("Select table No which need to make billing (1-15):");
@@ -61,13 +61,16 @@ public class Bills{
                 }
             }while(!no || scanTableNumber <= 0 || scanTableNumber > 15);
             
-            checkEmpty = table[scanTableNumber -1].getOccupy();
-            if(!checkEmpty.equals("Empty")){
+            checkEmpty = table[scanTableNumber -1].getOccupy(); //Check empty 
+            if(!checkEmpty.equals("Empty") && !checkEmpty.equals("Booking")){  //If the table is empty then cannot proceed to the billing 
                 notEmpty = true;
                 quitBill = false;
-            }else{
+            }
+
+            else{
                 notEmpty = false;
-                System.out.println("This table is empty!");
+                
+             
                 System.out.println("You can't proceed to bill");
                 //ask continue or quit
                 do{
@@ -86,18 +89,21 @@ public class Bills{
                     break;
                 }
 
-            }               
+            }
+            
         }while(!notEmpty);
+        
         Member askMember = new Member();
         boolean member;
         int dayVisit = 0;
         char confirmMember, continueMember;
         String proveID;
         proveID = "Nothing";
-        //Start billing'
+        //Start billing
         if(!quitBill){
             char comboSet;
             comboSet = table[scanTableNumber-1].getComboSet();
+            
             // got member > 3 days 
             // got member !>3days
             // no member 
@@ -111,12 +117,13 @@ public class Bills{
                     System.out.println("Please 'Y' or 'N' to continue");
                 }
             }while(!(confirmMember == 'Y' || confirmMember == 'N'));
+            
             //member validation     
             if(confirmMember == 'Y'){
                 do{
                     System.out.print("Enter Member ID : "); 
                     proveID = scan.nextLine();
-                    member = askMember.isMember(proveID);
+                    member = askMember.isMember(proveID); 
                     continueMember = 'N';
                     if(!member){
                         System.out.print("Invalid member ID!!!");
@@ -138,8 +145,8 @@ public class Bills{
             }    
             
             switch(comboSet){
-                case 'A': comboA(table,ProductList,MemberList,scanTableNumber,summarying,member,dayVisit,proveID);break;
-                case 'B': comboB(table,ProductList,MemberList,scanTableNumber,summarying,member,dayVisit,proveID);break;
+                case 'A': comboA(table,ProductList,MemberList,scanTableNumber,summarying,member,dayVisit,proveID);break; //8 Parameters
+                case 'B': comboB(table,ProductList,MemberList,scanTableNumber,summarying,member,dayVisit,proveID);break; 
                 case 'C': comboC(table,ProductList,MemberList,scanTableNumber,summarying,member,dayVisit,proveID);break;
                 case 'D': comboD(table,ProductList,MemberList,scanTableNumber,summarying,member,dayVisit,proveID);break;
             }   
@@ -158,20 +165,20 @@ public class Bills{
         }else{
             System.out.printf("Member: No\n");
         }
-        System.out.printf("Category\tNumber of pax\tPrice per person\tTotal\n");
-        System.out.printf("========\t=============\t================\t======\n");
+        System.out.printf("Category\tNumber of pax\tPrice per person\t Total\n");
+        System.out.printf("========\t=============\t================\t ======\n");
         //Display
         if(summarying[count].getCountAdult() !=0){
             double PricePerAdult = summarying[count].getTotalAdult() / summarying[count].getCountAdult();
-            System.out.printf("Adult\t%23d\t%-7.2f\t%7.2f\n",summarying[count].getCountAdult(),PricePerAdult,summarying[count].getTotalAdult());
+            System.out.printf("Adult\t%15d\t\t\t%-12.2f\t%7.2f\n",summarying[count].getCountAdult(),PricePerAdult,summarying[count].getTotalAdult());
         }
         if(summarying[count].getCountKid() !=0){
             double PricePerKid = summarying[count].getTotalKid()  / summarying[count].getCountKid();
-            System.out.printf("Kid\t%23d\t%-7.2f\t%7.2f\n",summarying[count].getCountKid(),PricePerKid,summarying[count].getTotalKid());
+            System.out.printf("Kid\t%15d\t\t\t%-12.2f\t%7.2f\n",summarying[count].getCountKid(),PricePerKid,summarying[count].getTotalKid());
         }
         if(summarying[count].getCountElder() !=0){
             double PricePerElder = summarying[count].getTotalElder() / summarying[count].getCountElder();
-            System.out.printf("Elder\t%23d\t%-7.2f\t%7.2f\n",summarying[count].getCountElder(),PricePerElder,summarying[count].getTotalElder());
+            System.out.printf("Elder\t%15d\t\t\t%-12.2f\t%7.2f\n",summarying[count].getCountElder(),PricePerElder,summarying[count].getTotalElder());
         }
         System.out.printf("Subtotal :%5.2f\n",summarying[count].getSubTotal()); // Subtotal
         //Discount Given
@@ -211,7 +218,7 @@ public class Bills{
         //membership
         if(member){
             if(dayVisit >= 3){               
-                grandTotal = grandTotal - (grandTotal * 0.1); //member discount
+                grandTotal = grandTotal - (grandTotal * 0.1); //member 10% discount
             }else{
                 grandTotal = grandTotal - (grandTotal * 0.05); //member discount
             }
@@ -238,7 +245,7 @@ public class Bills{
         displaywhatever(table,ProductList,summarying,scanTableNumber);                                        
         //Balance 
         do{
-            do{
+            do{ //Range of the figure
                 System.out.printf("Enter the figure to pay :");
                 try
                 {            
@@ -276,20 +283,23 @@ public class Bills{
                     quitBalance = true;
                     balance = paid - grandTotal;
                     System.out.printf("Balance : %-5.2f",balance);
+                    break;
+                            
                 }else{
                     quitBalance = false;
                 }
+                
             }else{
-                System.out.println("The figure entered are lower than the balance.");
+                System.out.println("The figure entered are lower than the grand total.");
                 quitBalance = false;
             }
-        }while(quitBalance);
+        }while(!quitBalance);
        
         char confirm;
         boolean quitBill;
         //ask to confirm or not
             do{
-                System.out.printf("Confirm the bill (Y/N): ");
+                System.out.printf("\nConfirm the bill (Y/N): ");
                 confirm = scan.next().charAt(0);   
                 scan.nextLine();
                 confirm = Character.toUpperCase(confirm);                
@@ -300,7 +310,7 @@ public class Bills{
             quitBill = confirm != 'Y';
             
         if(!quitBill){
-            summarying[count].setBalance(balance);
+            summarying[count].setBalance(balance); //paid - grandTotal = balance 
             count++;            
             table[scanTableNumber-1].setOccupy("Empty");
             table[scanTableNumber-1].setPersonCount(0);
@@ -411,20 +421,22 @@ public class Bills{
                     quitBalance = true;
                     balance = paid - grandTotal;
                     System.out.printf("Balance : %-5.2f",balance);
+                    break;
                 }else{
                     quitBalance = false;
+                    
                 }
             }else{
                 System.out.println("The figure entered are lower than the balance.");
                 quitBalance = false;
             }
-        }while(quitBalance);
+        }while(!quitBalance);
        
         char confirm;
         boolean quitBill;
         //ask to confirm or not
             do{
-                System.out.printf("Confirm the bill (Y/N): ");
+                System.out.printf("\nConfirm the bill (Y/N): ");
                 confirm = scan.next().charAt(0);   
                 scan.nextLine();
                 confirm = Character.toUpperCase(confirm);                
@@ -546,6 +558,7 @@ public class Bills{
                     quitBalance = true;
                     balance = paid - grandTotal;
                     System.out.printf("Balance : %-5.2f",balance);
+                    break;
                 }else{
                     quitBalance = false;
                 }
@@ -553,13 +566,13 @@ public class Bills{
                 System.out.println("The figure entered are lower than the balance.");
                 quitBalance = false;
             }
-        }while(quitBalance);
+        }while(!quitBalance);
        
         char confirm;
         boolean quitBill;
         //ask to confirm or not
             do{
-                System.out.printf("Confirm the bill (Y/N): ");
+                System.out.printf("\nConfirm the bill (Y/N): ");
                 confirm = scan.next().charAt(0);   
                 scan.nextLine();
                 confirm = Character.toUpperCase(confirm);                
@@ -669,7 +682,7 @@ public class Bills{
             if(paid > grandTotal){
                 //ask to confirm or not
                 do{
-                    System.out.printf("Confirm the figure entered (Y/N): ");
+                    System.out.println("Confirm the figure entered (Y/N): ");
                     confirmEnter = scan.next().charAt(0);   
                     scan.nextLine();
                     confirmEnter = Character.toUpperCase(confirmEnter);                
@@ -681,6 +694,7 @@ public class Bills{
                     quitBalance = true;
                     balance = paid - grandTotal;
                     System.out.printf("Balance : %-5.2f",balance);
+                    break;
                 }else{
                     quitBalance = false;
                 }
@@ -688,13 +702,13 @@ public class Bills{
                 System.out.println("The figure entered are lower than the balance.");
                 quitBalance = false;
             }
-        }while(quitBalance);
+        }while(!quitBalance);
        
         char confirm;
         boolean quitBill;
         //ask to confirm or not
             do{
-                System.out.printf("Confirm the bill (Y/N): ");
+                System.out.printf("\nConfirm the bill (Y/N): ");
                 confirm = scan.next().charAt(0);   
                 scan.nextLine();
                 confirm = Character.toUpperCase(confirm);                
@@ -730,4 +744,3 @@ public class Bills{
         }
     }
 }
-
