@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class StaffMainMenu {
     
-    public void StaffMenu() {
+    public static void StaffMenu() {
         //creates array
         int totalTable = 15;
         tables[] allTable = new tables[totalTable];
@@ -22,7 +22,7 @@ public class StaffMainMenu {
         
         Scanner scan = new Scanner(System.in);
         
-        while (choice != 6){
+        do{
             System.out.println("\tStaff Module"
                                 + "\n1.Open Table"
                                 + "\n2.Edit Table"
@@ -60,7 +60,7 @@ public class StaffMainMenu {
                 default:
                     System.out.println("That wasn't a choice...");
            }
-        }
+        }while(choice != 7);
     }
     
 }
