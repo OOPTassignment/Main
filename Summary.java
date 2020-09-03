@@ -79,8 +79,7 @@ public class Summary {
                 totalKid = 0;
                 totalElder = 0;
                 totalCust = 0;
-                totalPrice = 0;
-                totalGrandTotal = 0; 
+                totalPrice = 0; 
 
                     for (countSummary summarying1 : summarying) {
                         if (prodID == summarying1.getSet()) {
@@ -100,7 +99,7 @@ public class Summary {
 
             }
         }
-        System.out.println("\t\t\tTotal of Sales Of the day: " + totalGrandTotal);
+        System.out.println("\t\t\tTotal Sales Of the day: " + totalGrandTotal);
         
     }
 
