@@ -25,13 +25,14 @@ public class OpenTheTable {
                 }
             }    
             //show all tables
-            System.out.println("Table Details");
-            System.out.println("=============");
+            System.out.println("\t\t\t\tTable Details");
+            System.out.println("============================================================================");
             System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
             for(int i = 0; i < totalTable; i++){
                 System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
                         allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet());
             }
+            System.out.println("============================================================================");
             //select tableNo   
             do{
                 System.out.print("Select tableNo (1-15):");
@@ -88,7 +89,7 @@ public class OpenTheTable {
                                     System.out.print("Invalid integer input");
                                     error1 = false;
                                 }                                  
-                            }while(!(error1) || adultC <= 0 || adultC > 15);                          
+                            }while(!(error1) || adultC < 0 || adultC > 8);                          
                             do{     //input children
                                 System.out.print("Total children : ");
                                 try
@@ -101,7 +102,7 @@ public class OpenTheTable {
                                     System.out.print("Invalid integer input");
                                     error2 = false;
                                 }                                  
-                            }while(!(error2) || childC <= 0 || childC > 15);    
+                            }while(!(error2) || childC < 0 || childC > 8);    
                             do{     //input elders
                                 System.out.print("Total elder : ");
                                 try
@@ -114,13 +115,16 @@ public class OpenTheTable {
                                     System.out.println("Invalid integer input");
                                     error3 = false;
                                 }                                  
-                            }while(!(error3) || elderC <= 0 || elderC > 15);
+                            }while(!(error3) || elderC < 0 || elderC > 8);
                             //Calc total People
                             totalPerson = adultC + childC + elderC;                            
                             if(totalPerson > 8){
                                 System.out.println("The table can't fit all the people.");
                             }
-                        }while(totalPerson > 8);       //if more than 8 total personCount max
+                            if(totalPerson == 0){
+                                System.out.println("The table can't be empty.");
+                            }
+                        }while(totalPerson > 8 || totalPerson <= 0);       //if more than 8 total personCount max
                     //Scan combo set    
                     do{
                         System.out.print("Select the combo Set (A/B/C/D): ");
@@ -154,9 +158,8 @@ public class OpenTheTable {
                         allTable[scanTableNo-1].setComboSet(comboS);
                         if(inputInfo.equals("Occupy")){
                             //printtableInfo
-                            System.out.println("===================================================");
+                            System.out.println("======================================================");
                             System.out.printf("Your table is No. %2d and the time is until ", scanTableNo);
-                            System.out.println("===================================================");
                             LocalTime myTime = LocalTime.now();
                             LocalTime twoHoursLater = myTime.plusHours(2);
                             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
@@ -168,7 +171,7 @@ public class OpenTheTable {
                 }while(!(confirmOpen));
 
                 //Ask to reenter or exit
-                System.out.println("=======================================");
+                System.out.println("======================================================");
                 System.out.println("Do you want to open another table?");               
                 do{
                     System.out.print("Select Yes(Y) to continue or No(N) to exit: ");
