@@ -1,9 +1,4 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ooptassignment;
 import java.util.Scanner;
 
@@ -13,7 +8,7 @@ import java.util.Scanner;
  */
 public class ManagerMenu {
 
-    public void ManagerMenu (){
+    public static void main (String [] args){
         Scanner scn = new Scanner(System.in);
         Staff.initStaff();
         Product.initProd();
@@ -29,7 +24,9 @@ public class ManagerMenu {
             System.out.println("===================================================");
             System.out.println("| 3 | Manager Details");
             System.out.println("===================================================");
-            System.out.println("| 4 | Exit ");
+            System.out.println("| 4 | Staff Module ");
+            System.out.println("===================================================");
+            System.out.println("| 5 | Exit ");
             System.out.println("===================================================");
             System.out.print("Please enter your selection :");
             
@@ -48,6 +45,8 @@ public class ManagerMenu {
                         ManagerDetails.ManagerM();
                         break;
                     case 4:
+                        StaffMainMenu.StaffMenu();
+                    case 5:
                         return;
                     default:
                         System.out.print("Invalid code entered.\nPlease enter an existing code :");
