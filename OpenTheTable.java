@@ -4,6 +4,7 @@ import java.util.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.text.DateFormat;
+import java.util.ArrayList;
 
 //open table/booking table
 public class OpenTheTable {
@@ -11,28 +12,29 @@ public class OpenTheTable {
     public void openTable(tables[] allTable)
     {
         Scanner scan = new Scanner(System.in);        
-            int scanTableNo = 0;
-            int totalTable = 15;
-            char againToOpenTable;
-            boolean error;
+        int scanTableNo = 0;
+        int totalTable = 15;
+        char againToOpenTable;
+        boolean error;
+        ArrayList<Product> checkComboSet = Product.getProductList();
             
         boolean scanDoAgain;
         do{
             //fill all the table to empty !!for running the program at the first time
             if(allTable[0] == null){
                 for(int i = 0; i < totalTable; i++){
-                    allTable[i] = new tables(i+1, "Empty", 0, 0, 0, 0, '-');
+                    allTable[i] = new tables(i+1, "Empty", 0, 0, 0, 0, '-', "-");
                 }
             }    
             //show all tables
             System.out.println("\t\t\t\tTable Details");
-            System.out.println("============================================================================");
-            System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
+            System.out.println("==========================================================================================");
+            System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||" + " Time Until " + "||");
             for(int i = 0; i < totalTable; i++){
-                System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
-                        allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet());
+                System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c || %10s ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
+                        allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet(), allTable[i].getTableTime());
             }
-            System.out.println("============================================================================");
+            System.out.println("==========================================================================================");
             //select tableNo   
             do{
                 System.out.print("Select tableNo (1-15):");
@@ -53,7 +55,7 @@ public class OpenTheTable {
             }while(!(error) || scanTableNo <= 0 || scanTableNo > 15);
             //finding table
             boolean confirmOpen, errorString, error1, error2, error3;
-            String inputInfo;
+            String inputInfo, tableTimeLimit;
             char confirm, comboS;
             int adultC = 0, childC = 0, elderC = 0, totalPerson = 0;
             String selectedTable = allTable[scanTableNo-1].getOccupy();
@@ -125,16 +127,28 @@ public class OpenTheTable {
                                 System.out.println("The table can't be empty.");
                             }
                         }while(totalPerson > 8 || totalPerson <= 0);       //if more than 8 total personCount max
-                    //Scan combo set    
+                    //Scan combo set 
+                    boolean trueSet;
                     do{
-                        System.out.print("Select the combo Set (A/B/C/D): ");
+                        trueSet = true;
+                        ProductDetails.dispProd(checkComboSet);
+                        System.out.print("Select the combo Set: ");
                         comboS = scan.next().charAt(0);   
                         scan.nextLine();
-                        comboS = Character.toUpperCase(comboS);                
-                        if(!(comboS == 'A' || comboS == 'B' || comboS == 'C' || comboS == 'D')){
-                            System.out.println("Just Enter which set A or B or C or D.");
-                        }                       
-                    }while(!(comboS == 'A' || comboS == 'B' || comboS == 'C' || comboS == 'D'));
+                        comboS = Character.toUpperCase(comboS);   
+                        for(int i = 0; i < checkComboSet.size(); i++){
+                            if(comboS == checkComboSet.get(i).getProductID()){                             
+                                trueSet = true;
+                                break;
+                            }else{
+                                trueSet = false;
+                            }
+                        }
+                        if(trueSet == false){
+                            System.out.println("Select one Combo Set that exist.");
+                        }
+                       
+                    }while(!trueSet);
                     
                            
                     //confirmation 
@@ -164,6 +178,8 @@ public class OpenTheTable {
                             LocalTime twoHoursLater = myTime.plusHours(2);
                             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
                             System.out.println(twoHoursLater.format(dateTimeFormatter));
+                            tableTimeLimit = twoHoursLater.format(dateTimeFormatter);
+                            allTable[scanTableNo-1].setTableTime(tableTimeLimit);
                         }
                     }else{
                         confirmOpen = false;
