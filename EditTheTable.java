@@ -2,6 +2,7 @@ package ooptassignment;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //edit table such as edit info of the table (add, delete, remove,change)
@@ -17,7 +18,7 @@ public class EditTheTable {
                 System.out.println("============================================================================");
                 System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
                 for(int i = 0; i < 15; i++){
-                    System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
+                    System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %10c ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
                             allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet());
                 }
                 System.out.println("============================================================================");
@@ -151,8 +152,10 @@ public class EditTheTable {
                             LocalTime twoHoursLater = myTime.plusHours(2);
                             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
                             System.out.println(twoHoursLater.format(dateTimeFormatter));
+                            String tableTimeLimit = twoHoursLater.format(dateTimeFormatter);
                             System.out.println("Press enter to continue");
                             String pressToContinue = scan.nextLine();
+                            allTable[scanTableNo-1].setTableTime(tableTimeLimit);
                         }
                         if(inputInfo.equalsIgnoreCase("Empty")){
                             allTable[scanTableNo-1].setPersonCount(0);
@@ -160,6 +163,10 @@ public class EditTheTable {
                             allTable[scanTableNo-1].setChildCount(0);
                             allTable[scanTableNo-1].setElderCount(0);         
                             allTable[scanTableNo-1].setComboSet('-');
+                            allTable[scanTableNo-1].setTableTime("-");
+                        }
+                        if(inputInfo.equalsIgnoreCase("Booking")){
+                            allTable[scanTableNo-1].setTableTime("-");
                         }
                     }
                 }while(!(stringNoError));
@@ -551,9 +558,10 @@ public class EditTheTable {
     public static void editComboSet(tables[] allTable){
         int scanTableNo = 0;
         Scanner scan = new Scanner(System.in);
-        boolean error, tableIsEmpty, charNoError, confirmChange = false;
+        boolean error, tableIsEmpty, charNoError, confirmChange = false, trueSet;
         char inputInfo;
         char confirm, confirm1, confirm2, confirm3;
+        ArrayList<Product> checkComboSet = Product.getProductList();
         do{
             //scan tableNo
             do{     
@@ -583,7 +591,19 @@ public class EditTheTable {
                     inputInfo = scan.next().charAt(0); 
                     scan.nextLine();
                     inputInfo = Character.toUpperCase(inputInfo);
-                    if(inputInfo == 'A' || inputInfo == 'B' || inputInfo == 'C' || inputInfo == 'D'){                       
+                    trueSet = true;
+                    for(int i = 0; i < checkComboSet.size(); i++){
+                            if(inputInfo == checkComboSet.get(i).getProductID()){                             
+                                trueSet = true;
+                                break;
+                            }else{
+                                trueSet = false;
+                            }
+                        }
+                        if(trueSet == false){
+                            System.out.println("Select one Combo Set that exist.");
+                        }
+                    if(trueSet){                       
                         if(inputInfo != showComboSet)
                         {
                             //confirmation 
@@ -623,7 +643,7 @@ public class EditTheTable {
                             System.out.println("The value you input is the same as old value.");
                         }
                     }else{
-                        System.out.println("Invalid Input, the input must be (A/B/C/D)");
+                        System.out.println("Invalid Input combo Set");
                         //ask continue or quit
                             do{
                                 System.out.print("Would like to continue edit or exit (Y/N): ");
