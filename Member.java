@@ -23,6 +23,7 @@ public class Member {
     public Member() {
     }
 
+    //constructor
     public Member(String memberId, String name, String phoneNum, int daysVisit, String dateJoined, String expireDate) {
         this.memberId = memberId;
         this.name = name;
@@ -32,6 +33,7 @@ public class Member {
         this.expireDate = expireDate;
     }
 
+    //getter & setter
     public String getMemberId() {
         return memberId;
     }
@@ -98,28 +100,28 @@ public class Member {
     }
     
      public static boolean isMember(String theID){
-        initial();  
+        initial();  //get member list
         int checkID = 0;
         for(int i = 0; i < memberList.size(); i++){
-            if(memberList.get(i).getMemberId().equalsIgnoreCase(theID)){
-                checkID = 1;
-                return true;
+            if(memberList.get(i).getMemberId().equalsIgnoreCase(theID)){ //check if the input match
+                checkID = 1; 
+                return true;//return true when the id exist
             }
         }    
-        if(checkID == 0){
+        if(checkID == 0){ 
             System.out.println("The member ID entered doesn't exist!!!");
         }
         return false;
     }
     
     public static int memberVisitNum(String proveID){
-        initial();
+        initial(); //get member list
         for(int i = 0; i < memberList.size(); i++){
-            if(memberList.get(i).getMemberId().equalsIgnoreCase(proveID)){
-                return memberList.get(i).getDaysVisit();
+            if(memberList.get(i).getMemberId().equalsIgnoreCase(proveID)){  //check if the input match
+                return memberList.get(i).getDaysVisit(); //return number of the member days visited
             }
         }
-        return 0;
+        return 0;//return 0 when the input not matched
     }
     
 }
