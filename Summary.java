@@ -1,6 +1,5 @@
-package assignment;
+package ooptassignment;
 
-import static assignment.Bills.count;
 import java.util.Scanner;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 public class Summary {
     
-    public static void Summary2(tables [] table,ArrayList<Product> ProductList, countSummary[] summarying)
+    public static void Summary2(tables [] table, countSummary[] summarying)
     {
         //fill all the summary to empty !!for running the program at the first time
         if(summarying[0] == null){
@@ -56,6 +55,7 @@ public class Summary {
     }
     
     public static void totalSummary(countSummary[] summarying){
+        ArrayList<Product> checkComboSet = Product.getProductList();
         System.out.println("\t\t\t --------------");
         System.out.println("\t\t\t|Report Summary|");
         System.out.println("\t\t\t --------------");
@@ -68,7 +68,7 @@ public class Summary {
         for(int i=0;i<150;i++){
 
             set = summarying[i].getSet();
-           
+                 
             if(set == 'A'){
             totalAdultA += summarying[i].getCountAdult();
             totalKidA += summarying[i].getCountKid();
@@ -212,5 +212,6 @@ public class Summary {
         }
         
     }
+
       
 }
