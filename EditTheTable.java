@@ -1,5 +1,7 @@
 package ooptassignment;
 
+package ooptassignment;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -13,13 +15,14 @@ public class EditTheTable {
             int choice;
             do{
                 //show all tables
-                System.out.println("Table Details");
-                System.out.println("=============");
+                System.out.println("\t\t\t\tTable Details");
+                System.out.println("============================================================================");
                 System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
                 for(int i = 0; i < 15; i++){
                     System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
                             allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet());
                 }
+                System.out.println("============================================================================");
                 //ask to edit what
                 System.out.print("Select what you want to edit:\n");
                 System.out.print("=============================\n");
@@ -49,7 +52,7 @@ public class EditTheTable {
                        break;
                     case 6:
                        System.out.print("Back to staff menu...");
-                       break;
+                       return;
                     default:
                         System.out.println("That wasn't a choice...");
                }
@@ -76,7 +79,7 @@ public class EditTheTable {
                     scan.nextLine();
                 }
                 catch (Exception ex){
-                    System.out.print("Invalid integer input");
+                    System.out.println("Invalid integer input");
                     error = false;
                     scan.nextLine();
                 }    
@@ -87,13 +90,16 @@ public class EditTheTable {
             String selectedTable = allTable[scanTableNo-1].getOccupy();
             if(!selectedTable.equalsIgnoreCase("Empty")){
                 do{    
-                    System.out.print("Enter the edit table info (Booking)/(Occupy): ");
+                    System.out.println("The current table condition is "+selectedTable+" what would you like to change to?");
+                    System.out.print("Select the table info (Booking)/(Occupy)/(Empty): ");
                     inputInfo = scan.nextLine();                           
-                    if(inputInfo.equalsIgnoreCase("Booking") || inputInfo.equalsIgnoreCase("Occupy")){
+                    if(inputInfo.equalsIgnoreCase("Booking") || inputInfo.equalsIgnoreCase("Occupy") || inputInfo.equalsIgnoreCase("Empty")){
                         if(inputInfo.equalsIgnoreCase("Booking")){
                             inputInfo = "Booking";
-                        }else{
+                        }else if(inputInfo.equalsIgnoreCase("Occupy")){
                             inputInfo = "Occupy";
+                        }else{
+                            inputInfo = "Empty";
                         }
                         if(!inputInfo.equals(selectedTable))
                         {
@@ -111,7 +117,7 @@ public class EditTheTable {
                                 stringNoError = true;
                                 confirmChange = true;
                             }else{
-                                System.out.print("Value did not edited.");
+                                System.out.println("Value did not edited.");
                                 //ask continue or quit
                                 do{
                                     System.out.print("Would like to continue edit or exit (Y/N): ");
@@ -141,11 +147,22 @@ public class EditTheTable {
                         allTable[scanTableNo-1].setOccupy(inputInfo);
                         //set the table time if occupy
                         //printtableInfo
-                            System.out.printf("The table No. %2d had starts until ", scanTableNo);
+                        if(inputInfo.equalsIgnoreCase("Occupy")){
+                            System.out.printf("\nThe table No.%2d had starts until ", scanTableNo);
                             LocalTime myTime = LocalTime.now();
                             LocalTime twoHoursLater = myTime.plusHours(2);
                             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
                             System.out.println(twoHoursLater.format(dateTimeFormatter));
+                            System.out.println("Press enter to continue");
+                            String pressToContinue = scan.nextLine();
+                        }
+                        if(inputInfo.equalsIgnoreCase("Empty")){
+                            allTable[scanTableNo-1].setPersonCount(0);
+                            allTable[scanTableNo-1].setAdultCount(0);
+                            allTable[scanTableNo-1].setChildCount(0);
+                            allTable[scanTableNo-1].setElderCount(0);         
+                            allTable[scanTableNo-1].setComboSet('-');
+                        }
                     }
                 }while(!(stringNoError));
                 tableIsEmpty = false;
@@ -187,7 +204,7 @@ public class EditTheTable {
                     scan.nextLine();
                 }
                 catch (Exception ex){
-                    System.out.print("Invalid integer input");
+                    System.out.println("Invalid integer input");
                     error = false;
                     scan.nextLine();
                 }    
@@ -308,7 +325,7 @@ public class EditTheTable {
                     scan.nextLine();
                 }
                 catch (Exception ex){
-                    System.out.print("Invalid integer input");
+                    System.out.println("Invalid integer input");
                     error = false;
                     scan.nextLine();
                 }    
@@ -323,7 +340,7 @@ public class EditTheTable {
             int showElderC = allTable[scanTableNo-1].getElderCount();
             if(!selectedTable.equalsIgnoreCase("Empty")){
                 do{    
-                    System.out.printf("The old Child value is %d.\n", showChildC);
+                    System.out.printf("The current Child value is %d.\n", showChildC);
                     System.out.print("Enter to edit child number : ");
                     inputInfo = scan.nextInt();  
                     if((showAdultC + showElderC + inputInfo) <= 8){                       
@@ -429,7 +446,7 @@ public class EditTheTable {
                     scan.nextLine();
                 }
                 catch (Exception ex){
-                    System.out.print("Invalid integer input");
+                    System.out.println("Invalid integer input");
                     error = false;
                     scan.nextLine();
                 }    
@@ -444,7 +461,7 @@ public class EditTheTable {
             int showElderC = allTable[scanTableNo-1].getElderCount();
             if(!selectedTable.equalsIgnoreCase("Empty")){
                 do{    
-                    System.out.printf("The old Elder value is %d.\n", showElderC);
+                    System.out.printf("The current Elder value is %d.\n", showElderC);
                     System.out.print("Enter to edit elder number : ");
                     inputInfo = scan.nextInt();  
                     if((showAdultC + showChildC + inputInfo) <= 8){                       
@@ -550,7 +567,7 @@ public class EditTheTable {
                     scan.nextLine();
                 }
                 catch (Exception ex){
-                    System.out.print("Invalid integer input");
+                    System.out.println("Invalid integer input");
                     error = false;
                     scan.nextLine();
                 }    
@@ -563,7 +580,7 @@ public class EditTheTable {
             char showComboSet = allTable[scanTableNo-1].getComboSet();
             if(!selectedTable.equalsIgnoreCase("Empty")){
                 do{    
-                    System.out.printf("The old Combo Set is %c.\n", showComboSet);
+                    System.out.println("The current Combo Set is "+showComboSet);
                     System.out.print("Enter to edit Combo Set : ");
                     inputInfo = scan.next().charAt(0); 
                     scan.nextLine();
