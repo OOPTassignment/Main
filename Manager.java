@@ -11,7 +11,7 @@ package ooptassignment;
  */
 import java.util.ArrayList;
 public class Manager extends Employees{
-    private static ArrayList<Manager> ManagerList;
+    protected static ArrayList<Manager> managerList;
     
     public Manager(){
             
@@ -21,18 +21,19 @@ public class Manager extends Employees{
     }
     
 
+
     public static ArrayList<Manager> getManagerList() {
-        return ManagerList;
+        return managerList;
     }
 
-    public static void setManagerList(ArrayList<Manager> ManagerList) {
-        Manager.ManagerList = ManagerList;
+    public static void setManagerList(ArrayList<Manager> managerList) {
+        Manager.managerList = managerList;
     }
     
-    public static void initManager(){
-        ManagerList = new ArrayList<>();
-        ManagerList.add(new Manager("M001", "Mek Di", "23/06/2001", 3000.00, "abc123"));
-        ManagerList.add(new Manager("M002", "Justin", "23/07/2001", 5000.00, "def123"));
-        ManagerList.add(new Manager("M003", "Pee shee", "23/09/2001", 1000.00, "ghi123"));
+    protected static void initManager(){
+        managerList = new ArrayList<>();
+        managerList.add(new Manager("M001", "Mek Di", "23/06/2001", 3000.00, "abc123"));
+        managerList.add(new Manager("M002", "Justin", "23/07/2001", 5000.00, "def123"));
+        managerList.add(new Manager("M003", "Pee shee", "23/09/2001", 1000.00, "ghi123"));
     }
 }

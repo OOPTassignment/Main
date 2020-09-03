@@ -56,121 +56,126 @@ public class Summary {
     
     public static void totalSummary(countSummary[] summarying){
         ArrayList<Product> checkComboSet = Product.getProductList();
+        int totalAdult = 0, totalKid = 0, totalElder = 0, totalCust = 0;
+        double totalPrice = 0, totalGrandTotal = 0; 
         System.out.println("\t\t\t --------------");
         System.out.println("\t\t\t|Report Summary|");
         System.out.println("\t\t\t --------------");
         System.out.println("*********************************************************************");
-        int totalAdultA = 0,totalKidA = 0,totalElderA = 0;
-        int totalAdultB = 0,totalKidB = 0,totalElderB = 0;
-        int totalAdultC = 0,totalKidC = 0,totalElderC = 0;
-        int totalAdultD = 0,totalKidD = 0,totalElderD = 0;
-        char set;
-        for(int i=0;i<150;i++){
-
-            set = summarying[i].getSet();
-                 
-            if(set == 'A'){
-            totalAdultA += summarying[i].getCountAdult();
-            totalKidA += summarying[i].getCountKid();
-            totalElderA += summarying[i].getCountElder();
-            }
-            
-            if(set == 'B'){
-            totalAdultB += summarying[i].getCountAdult();
-            totalKidB += summarying[i].getCountKid();
-            totalElderB += summarying[i].getCountElder();
-            }
-                        
-            if(set == 'C'){
-            totalAdultC += summarying[i].getCountAdult();
-            totalKidC += summarying[i].getCountKid();
-            totalElderC += summarying[i].getCountElder();
-            }
-            
-            if(set == 'D'){
-            totalAdultD += summarying[i].getCountAdult();
-            totalKidD += summarying[i].getCountKid();
-            totalElderD += summarying[i].getCountElder();
-            }
-            
-        }
         //Date
         LocalDate todayDate = LocalDate.now();
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = todayDate.format(formatDate);
         System.out.printf("Date :");
         System.out.println(date);
+//        int totalAdultA = 0,totalKidA = 0,totalElderA = 0;
+//        int totalAdultB = 0,totalKidB = 0,totalElderB = 0;
+//        int totalAdultC = 0,totalKidC = 0,totalElderC = 0;
+//        int totalAdultD = 0,totalKidD = 0,totalElderD = 0;
         
-        double totalA, totalB,totalC,totalD;
-        System.out.printf("Set Name:A\n"); // Set A
-        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
-        System.out.printf("========\t===================\t================\t======\n\n");
-        System.out.printf("Adult\t\t\t%d\t\t  RM 18.99\t\t %.2f\t\n",totalAdultA,totalAdultA*18.99);
-        System.out.printf("Kid\t\t\t%d\t\t  RM 12.99\t\t %.2f\t\n",totalKidA,totalKidA*12.99);
-        System.out.printf("Elder\t\t\t%d\t\t  RM 14.99\t\t %.2f\t\n",totalElderA,totalElderA*14.99);
-        totalA = (totalAdultA * 18.99) + (totalKidA * 12.99) + (totalElderA * 14.99);
-        System.out.printf("\t\t\t\t===========\n");
-        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalA);
-        
-        
-        System.out.printf("Set Name:B\n"); // Set B
-        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
-        System.out.printf("========\t===================\t================\t======\n\n");
-        System.out.printf("Adult\t\t\t%d\t\t  RM 24.99\t\t %.2f\t\n",totalAdultB,totalAdultB*24.99);
-        System.out.printf("Kid\t\t\t%d\t\t  RM 18.99\t\t %.2f\t\n",totalKidB,totalKidB*18.99);
-        System.out.printf("Elder\t\t\t%d\t\t  RM 20.99\t\t %.2f\t\n",totalElderB,totalElderB*20.99);
-        totalB = (totalAdultB * 24.99) + (totalKidB * 18.99) + (totalElderB * 20.99);
-        System.out.printf("\t\t\t\t===========\n");
-        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalB);
-        
-        System.out.printf("Set Name:C\n"); // Set C
-        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
-        System.out.printf("========\t===================\t================\t======\n\n");
-        System.out.printf("Adult\t\t\t%d\t\t  RM 35.99\t\t %.2f\t\n",totalAdultC,totalAdultC*35.99);
-        System.out.printf("Kid\t\t\t%d\t\t  RM 20.99\t\t %.2f\t\n",totalKidC,totalKidC*20.99);
-        System.out.printf("Elder\t\t\t%d\t\t  RM 30.99\t\t %.2f\t\n",totalElderC,totalElderC*30.99);
-        totalC = (totalAdultC * 35.99) + (totalKidC * 20.99) + (totalElderC * 30.99);
-        System.out.printf("\t\t\t\t===========\n");
-        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalC);
-        
-        System.out.printf("Set Name:C\n"); // Set D
-        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
-        System.out.printf("========\t===================\t================\t======\n\n");
-        System.out.printf("Adult\t\t\t%d\t\t  RM 40.99\t\t %.2f\t\n",totalAdultD,totalAdultD*40.99);
-        System.out.printf("Kid\t\t\t%d\t\t  RM 35.99\t\t %.2f\t\n",totalKidD,totalKidD*35.99);
-        System.out.printf("Elder\t\t\t%d\t\t  RM 30.99\t\t %.2f\t\n",totalElderD,totalElderD*30.99);
-        totalD = (totalAdultD * 40.99) + (totalKidD * 35.99) + (totalElderD * 30.99);
-        System.out.printf("\t\t\t\t===========\n");
-        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalD);
-        System.out.printf("//////////////////////////////////////////////////////////////////////\n");
-        System.out.printf("\t\t\t\tSet A: %.2f\n",totalA); //Total price of Set A
-        System.out.printf("\t\t\t\tSet B: %.2f\n",totalB); //Total price of Set B
-        System.out.printf("\t\t\t\tSet C: %.2f\n",totalC); //Total price of Set C
-        System.out.printf("\t\t\t\tSet D: %.2f\n",totalD); //Total price of Set D
-       
-        double totalSales;
-        Scanner scan = new Scanner(System.in);
-        char start;
-        do{
-            System.out.printf("Enter 'Y' to start calculate total sales or 'N' to cancel:"); //Scan
-            start = scan.next().charAt(0);
-            scan.nextLine();
-            start = Character.toUpperCase(start);
-            if(!(start != 'Y'  || start != 'N')){
-                System.out.println("Wrong input.");
-                System.out.println("Please enter 'Y' or 'N'");
+        int setSize = checkComboSet.size();
+        int prodID = 65;
+        if(summarying != null){
+            for(int i=0; i<setSize; i++){            
+                char convert = (char)(prodID);
+                totalAdult = 0;
+                totalKid = 0;
+                totalElder = 0;
+                totalCust = 0;
+                totalPrice = 0;
+                totalGrandTotal = 0; 
+
+                    for (countSummary summarying1 : summarying) {
+                        if (prodID == summarying1.getSet()) {
+                            totalAdult += summarying1.getCountAdult();
+                            totalKid += summarying1.getCountKid();
+                            totalElder += summarying1.getCountAdult();
+                            totalCust = totalAdult + totalKid + totalElder;
+                            totalPrice += summarying1.getGrandTotal();
+                            totalGrandTotal += totalPrice;
+                            break;
+                        }
+                    }
+                String summaryMsg = countSummary.toString(convert, totalAdult, totalKid, totalElder, totalCust, totalPrice, i, checkComboSet);
+                System.out.print(summaryMsg);
+                prodID += 1;
+
+
             }
-        }while(!(start != 'Y'  || start != 'N'));
-        if(start == 'Y')
-        {
-            totalSales = totalA + totalB + totalC +totalD;
-            System.out.printf("\t\t\t\t===========\n");
-            System.out.printf("Date :");
-            System.out.println(date);
-            System.out.printf("\t\t\tTotal of Sales Report: %.2f\n\n",totalSales);
         }
+        System.out.println("\t\t\tTotal of Sales Of the day: " + totalGrandTotal);
+        
     }
-    
+//        double totalA, totalB,totalC,totalD;
+//        System.out.printf("Set Name:A\n"); // Set A
+//        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
+//        System.out.printf("======="Category\tTotal Number of Pax\tPrice Per Person\tTotal\n"=\t===================\t================\t======\n\n");
+//        System.out.printf("Adult\t\t\t%d\t\t  RM 18.99\t\t %.2f\t\n",totalAdultA,totalAdultA*18.99);
+//        System.out.printf("Kid\t\t\t%d\t\t  RM 12.99\t\t %.2f\t\n",totalKidA,totalKidA*12.99);
+//        System.out.printf("Elder\t\t\t%d\t\t  RM 14.99\t\t %.2f\t\n",totalElderA,totalElderA*14.99);
+//        totalA = (totalAdultA * 18.99) + (totalKidA * 12.99) + (totalElderA * 14.99);
+//        System.out.printf("\t\t\t\t===========\n");
+//        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalA);
+//        
+//        
+//        System.out.printf("Set Name:B\n"); // Set B
+//        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
+//        System.out.printf("========\t===================\t================\t======\n\n");
+//        System.out.printf("Adult\t\t\t%d\t\t  RM 24.99\t\t %.2f\t\n",totalAdultB,totalAdultB*24.99);
+//        System.out.printf("Kid\t\t\t%d\t\t  RM 18.99\t\t %.2f\t\n",totalKidB,totalKidB*18.99);
+//        System.out.printf("Elder\t\t\t%d\t\t  RM 20.99\t\t %.2f\t\n",totalElderB,totalElderB*20.99);
+//        totalB = (totalAdultB * 24.99) + (totalKidB * 18.99) + (totalElderB * 20.99);
+//        System.out.printf("\t\t\t\t===========\n");
+//        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalB);
+//        
+//        System.out.printf("Set Name:C\n"); // Set C
+//        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
+//        System.out.printf("========\t===================\t================\t======\n\n");
+//        System.out.printf("Adult\t\t\t%d\t\t  RM 35.99\t\t %.2f\t\n",totalAdultC,totalAdultC*35.99);
+//        System.out.printf("Kid\t\t\t%d\t\t  RM 20.99\t\t %.2f\t\n",totalKidC,totalKidC*20.99);
+//        System.out.printf("Elder\t\t\t%d\t\t  RM 30.99\t\t %.2f\t\n",totalElderC,totalElderC*30.99);
+//        totalC = (totalAdultC * 35.99) + (totalKidC * 20.99) + (totalElderC * 30.99);
+//        System.out.printf("\t\t\t\t===========\n");
+//        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalC);
+//        
+//        System.out.printf("Set Name:C\n"); // Set D
+//        System.out.printf("Category\tTotal Number of Pax\tPrice Per Person\tTotal\n");
+//        System.out.printf("========\t===================\t================\t======\n\n");
+//        System.out.printf("Adult\t\t\t%d\t\t  RM 40.99\t\t %.2f\t\n",totalAdultD,totalAdultD*40.99);
+//        System.out.printf("Kid\t\t\t%d\t\t  RM 35.99\t\t %.2f\t\n",totalKidD,totalKidD*35.99);
+//        System.out.printf("Elder\t\t\t%d\t\t  RM 30.99\t\t %.2f\t\n",totalElderD,totalElderD*30.99);
+//        totalD = (totalAdultD * 40.99) + (totalKidD * 35.99) + (totalElderD * 30.99);
+//        System.out.printf("\t\t\t\t===========\n");
+//        System.out.printf("\t\t\t\tTotal :%.2f\n\n",totalD);
+//        System.out.printf("//////////////////////////////////////////////////////////////////////\n");
+//        System.out.printf("\t\t\t\tSet A: %.2f\n",totalA); //Total price of Set A
+//        System.out.printf("\t\t\t\tSet B: %.2f\n",totalB); //Total price of Set B
+//        System.out.printf("\t\t\t\tSet C: %.2f\n",totalC); //Total price of Set C
+//        System.out.printf("\t\t\t\tSet D: %.2f\n",totalD); //Total price of Set D
+//       
+//        double totalSales;
+//        Scanner scan = new Scanner(System.in);
+//        char start;
+//        do{
+//            System.out.printf("Enter 'Y' to start calculate total sales or 'N' to cancel:"); //Scan
+//            start = scan.next().charAt(0);
+//            scan.nextLine();
+//            start = Character.toUpperCase(start);
+//            if(!(start != 'Y'  || start != 'N')){
+//                System.out.println("Wrong input.");
+//                System.out.println("Please enter 'Y' or 'N'");
+//            }
+//        }while(!(start != 'Y'  || start != 'N'));
+//        if(start == 'Y')
+//        {
+//            totalSales = totalA + totalB + totalC +totalD;
+//            System.out.printf("\t\t\t\t===========\n");
+//            System.out.printf("Date :");
+//            System.out.println(date);
+//            System.out.printf("\t\t\tTotal of Sales Report: %.2f\n\n",totalSales);
+//        }
+//    }
+//    
     public static void billHistory(countSummary[] summarying){
         Scanner scan = new Scanner(System.in);
         char chooseSet;
@@ -215,3 +220,4 @@ public class Summary {
 
       
 }
+

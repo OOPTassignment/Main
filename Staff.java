@@ -10,7 +10,7 @@ package ooptassignment;
  */
 import java.util.ArrayList;
 public class Staff extends Employees{
-    private static ArrayList<Staff> staffList;
+    protected static ArrayList<Staff> staffList;
     
     public Staff(){
             
@@ -28,7 +28,7 @@ public class Staff extends Employees{
         Staff.staffList = staffList;
     }
     
-    public static void initStaff(){
+    protected static void initStaff(){
         staffList = new ArrayList<>();
         staffList.add(new Staff("S001", "lee", "23/06/2016", 3000.00, "abc123"));
         staffList.add(new Staff("S002", "lim", "12/07/2019", 5000.00, "def123"));

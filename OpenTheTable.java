@@ -1,3 +1,4 @@
+
 package ooptassignment;
 import java.util.Scanner;
 import java.util.*;
@@ -224,3 +225,4 @@ public class OpenTheTable {
         }while(scanDoAgain);
     }
 }
+

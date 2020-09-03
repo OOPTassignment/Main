@@ -82,7 +82,7 @@ public class Member {
     }
     
     
-    public static void initial(){
+    protected static void initial(){
         memberList = new ArrayList<>();
         memberList.add(new Member("MC001", "Habo", "0163658975", 1, "19/03/2020", "19/09/2020"));
         memberList.add(new Member("MC002", "Macd", "0122252614", 2, "26/05/2020", "26/11/2020"));
