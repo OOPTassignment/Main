@@ -150,10 +150,10 @@ public class countSummary {
     public static String toString(char setID, int totalAdult,int totalKid,int totalElder, int totalCust, double totalPrice, 
             int array, ArrayList<Product> ProductList){
         return "Set: " + setID + "\nCategory\tTotal Number of Pax\tPrice Per Person\tTotal\n"+
-                "Adult\t\t\t" + totalAdult + "\t\t  " + ProductList.get(array).getpPriceAdults() + "\t\t\t" + totalAdult * ProductList.get(array).getpPriceAdults() + "\t\n" +
-                "Kid\t\t\t" + totalKid + "\t\t  " + ProductList.get(array).getpPriceKids() + "\t\t\t" + totalKid * ProductList.get(array).getpPriceKids() + "\t\n" +
-                "Elder\t\t\t" + totalElder + "\t\t  " + ProductList.get(array).getpPriceElders() + "\t\t\t" + totalElder * ProductList.get(array).getpPriceElders() + "\t\n" +
-                "\t\t\t\t\t\t\t===========\n" +
-                "\t\t\t\t\t\tTotal: " + totalPrice + "\n" ;
+                "Adult\t\t\t" + totalAdult + "\t\t     " + ProductList.get(array).getpPriceAdults() + "\t\t " + totalAdult * ProductList.get(array).getpPriceAdults() + "\t\n" +
+                "Kid\t\t\t" + totalKid + "\t\t     " + ProductList.get(array).getpPriceKids() + "\t\t " + totalKid * ProductList.get(array).getpPriceKids() + "\t\n" +
+                "Elder\t\t\t" + totalElder + "\t\t     " + ProductList.get(array).getpPriceElders() + "\t\t " + totalElder * ProductList.get(array).getpPriceElders() + "\t\n" +
+                "\t\t\t\t\t\t\t  ===========\n" +
+                "\t\t\t\t\t\t\tTotal: " + totalPrice + "\n" ;
     }
 }

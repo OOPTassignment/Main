@@ -280,13 +280,13 @@ public class ProductDetails {
         System.out.println("");  
         System.out.printf("\n%20sProduct Information\n", "");
         System.out.printf("|%-12s|%-20s|%-20s|%-20s|%-20s|","Product ID","Product Name","Price for Kids","Price for Adults","Price for Elders");
-        System.out.printf("\n=====================================================================================");
+        System.out.printf("\n==================================================================================================");
         for(int x = 0; x < checkProd.size(); x++){
             System.out.printf("\n%s%-12c%s%-20s%s%20.2f%s%20.2f%s%20.2f"," ",checkProd.get(x).getProductID()," ",checkProd.get(x).getProdName()," ", checkProd.get(x).getpPriceKids()," "
                     , checkProd.get(x).getpPriceAdults()," ", checkProd.get(x).getpPriceElders());
         }
         System.out.println("\n");
-        System.out.println("\n=====================================================================================");
+        System.out.println("\n==================================================================================================");
     }
     
     public static void delProd(ArrayList<Product> checkProd){
