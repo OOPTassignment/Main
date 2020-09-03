@@ -1,3 +1,9 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ooptassignment;
 import java.util.Scanner;
 
@@ -55,7 +61,7 @@ public class ManagerMenu {
                 scn.nextLine();
                 System.out.println("Invalid selection entered !");
             }
-        }while(selection!=4 || catchInt==false);
+        }while(selection!=5 || catchInt==false);
            
     }
 
