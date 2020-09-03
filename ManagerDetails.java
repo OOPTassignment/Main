@@ -181,7 +181,7 @@ public class ManagerDetails {
             System.out.println("===================================================");
             System.out.println("| 1 | Modify Manager Name ");
             System.out.println("===================================================");
-            System.out.println("| 2 | Modify Manager ");
+            System.out.println("| 2 | Modify Salary ");
             System.out.println("===================================================");
             System.out.println("| 3 | Modify Password ");
             System.out.println("===================================================");
