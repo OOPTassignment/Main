@@ -1,4 +1,4 @@
-package ooptassignment;
+package assignment;
 
 import java.util.Scanner;
 import java.util.Scanner;
@@ -154,10 +154,7 @@ public class Bills{
     }
     public static void displaywhatever(tables[] table,ArrayList<Product> ProductList,countSummary[] summarying, int scanTableNumber){
         
-        LocalDate todayDate = LocalDate.now();
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String date = todayDate.format(formatDate);
-        System.out.printf(date);
+
         System.out.printf("\t\tTable No :%d\n", scanTableNumber); 
         System.out.printf("Set Name:%c\n", table[scanTableNumber-1].getComboSet()); //Read what kind set first 
         if(summarying[count].isIsMember() == true){
