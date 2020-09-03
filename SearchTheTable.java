@@ -8,19 +8,21 @@ public class SearchTheTable {
     {
         int scanOption = 0;
         //show all tables
-        System.out.println("Search Table");
-        System.out.println("============");
+        System.out.println("\t\t\t\tSearch Table");
+        System.out.println("============================================================================");
         System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
         for(int i = 0; i < 15; i++){
             System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c ||\n" ,allTable[i].getTableNo(), allTable[i].getOccupy(), allTable[i].getPersonCount(),
                     allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet());
         }
+        System.out.println("============================================================================");
         do{
             //Search 
             Scanner scan = new Scanner(System.in);   
             boolean error;              
                 //Scan options
                 do{
+                    System.out.println("");
                     System.out.println("Select your option: ");
                     System.out.println("1. Search by Table No");
                     System.out.println("2. Search by Condition");
@@ -34,7 +36,7 @@ public class SearchTheTable {
                         scan.nextLine();
                     }
                     catch (Exception ex){
-                        System.out.print("Invalid integer input");
+                        System.out.println("Invalid integer input");
                         error = false;
                         scan.nextLine();
                     }    
@@ -78,7 +80,7 @@ public class SearchTheTable {
                 scan.nextLine();
             }
             catch (Exception ex){
-                System.out.print("Invalid integer input");
+                System.out.println("Invalid integer input");
                 error = false;
                 scan.nextLine();
             }    
@@ -86,11 +88,11 @@ public class SearchTheTable {
                 System.out.println("The value must in this range (1-15).");
             }
         }while(!(error) || scanTableNo <= 0 || scanTableNo > 15);
-        System.out.println("=============================================================================================================================================");
+        System.out.println("============================================================================");
         System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
         System.out.printf("%2d || %10s || %10d || %5d || %8d || %5d || %9c ||\n" ,allTable[scanTableNo-1].getTableNo(), allTable[scanTableNo-1].getOccupy(), allTable[scanTableNo-1].getPersonCount(),
                             allTable[scanTableNo-1].getAdultCount(), allTable[scanTableNo-1].getChildCount(), allTable[scanTableNo-1].getElderCount(), allTable[scanTableNo-1].getComboSet());
-        System.out.println("=============================================================================================================================================");
+        System.out.println("============================================================================");
     }
     
     public static void searchCondition(tables[] allTable){
@@ -135,7 +137,7 @@ public class SearchTheTable {
         int totalResult = 0;
         if(inputInfo.equals("Booking")){
             System.out.println("Booking Table Found");
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
             for(int i = 0; i < 15; i++){
                 if(allTable[i].getOccupy().equals("Booking")){
@@ -144,11 +146,11 @@ public class SearchTheTable {
                     totalResult++;
                 }
             }
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.printf("Total Booking Table > %-2d\n", totalResult);
         }else if(inputInfo.equals("Occupy")){
             System.out.println("Occupy Table Found");
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
             for(int i = 0; i < 15; i++){
                 if(allTable[i].getOccupy().equals("Occupy")){
@@ -157,11 +159,11 @@ public class SearchTheTable {
                     totalResult++;
                 }
             }
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.printf("Total Occupy Table > %-2d\n", totalResult);
         }else{
             System.out.println("Empty Table Found");
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
             for(int i = 0; i < 15; i++){
                 if(allTable[i].getOccupy().equals("Empty")){
@@ -170,7 +172,7 @@ public class SearchTheTable {
                     totalResult++;
                 }
             }
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.printf("Total Empty Table > %-2d\n", totalResult);
         }
     }
@@ -191,7 +193,7 @@ public class SearchTheTable {
         }while(!(comboS == 'A' || comboS == 'B' || comboS == 'C' || comboS == 'D' || comboS == '-'));
         //show all tables
             System.out.printf("Combo Set %c Table Found\n", comboS);
-            System.out.println("=============================================================================================================================================");
+            System.out.println("============================================================================");
             System.out.println("No " + "||" + "  Condition " + "||" + " Total Head " + "||" + " Adult " + "||" + " Children " + "||" + " Elder " + "||" + " Combo Set " + "||");
                 
             for(int i = 0; i < 15; i++){
@@ -202,7 +204,7 @@ public class SearchTheTable {
                     allTable[i].getAdultCount() , allTable[i].getChildCount(), allTable[i].getElderCount(), allTable[i].getComboSet());
                 }                 
             }
-            System.out.println("===============================================================================================");
+            System.out.println("============================================================================");
             System.out.printf("Total table found %2d\n", totalResult);
                 
         }
