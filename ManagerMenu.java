@@ -1,4 +1,3 @@
-
 package ooptassignment;
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ import java.util.Scanner;
  */
 public class ManagerMenu {
 
-    public static void main (String [] args){
+    public static void ManagerMenu (){
         Scanner scn = new Scanner(System.in);
         Staff.initStaff();
         Product.initProd();
