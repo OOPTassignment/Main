@@ -1,4 +1,3 @@
-
 package ooptassignment;
 
 import java.util.Scanner;
@@ -10,13 +9,14 @@ public class StaffMainMenu {
         int totalTable = 15;
         tables[] allTable = new tables[totalTable];
         countSummary[] summarying = new countSummary[150];
+        Product.initProd();
         //classes
         OpenTheTable option1 = new OpenTheTable();
         EditTheTable option2 = new EditTheTable();
         SearchTheTable option3 = new SearchTheTable();
         Membership option4 = new Membership();
         Bills option5 = new Bills();
-//        optionSix option6 = new optionSix();
+        Summary option6 = new Summary();
         
         int choice = 0;
         
@@ -52,7 +52,7 @@ public class StaffMainMenu {
                    Bills.Billing(allTable, summarying);
                    break;
                 case 6:
-//                   
+                   Summary.Summary2(allTable, summarying);
                    break;
                 case 7: 
                    System.out.println("Logging out to the login screen...");
