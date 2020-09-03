@@ -160,7 +160,7 @@ public class StaffDetails {
                 System.out.println("Password can only have 18 characters");
                 limitPw = false;
             }
-            else if((password.equals(""))||(password.length()<8)){
+            else if((password.equals(""))||(password.length()<6)){
                 System.out.println("Password must have at least 8 characters");
                 limitPw = false;
             }
@@ -230,7 +230,7 @@ public class StaffDetails {
                                 System.out.println("Password can only have 18 characters");
                                 limitPw = false;
                             }
-                            else if((password.equals(""))||(password.length()<8)){
+                            else if((password.equals(""))||(password.length()<6)){
                                 System.out.println("Password must have at least 8 characters");
                                 limitPw = false;
                             }
