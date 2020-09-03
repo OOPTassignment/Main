@@ -42,7 +42,7 @@ public class Membership extends Member{
                     case 3: removeMember(); break;
                     case 4: displayMember(); break;
                     case 5: searchMember(); break;
-                    case 0: System.exit(0); break;
+                    case 0: return; 
                     default: System.out.println("Please enter number above!\n");
                 }
             }catch(Exception ez){
