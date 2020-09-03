@@ -46,39 +46,39 @@ public class StaffDetails {
                     case 1:
                         char addMore;
                         do{
-                         addNewStaff(checkStaff);
+                         addNewStaff(checkStaff);//pass in arraylist checkStaff
                          System.out.print("Do you want to add more?(Y/N)");
-                         addMore=scn.next().charAt(0);
+                         addMore=scn.next().charAt(0);//ask for user input to add another
                          Character.toUpperCase(addMore);
                          if(addMore!='Y'||addMore!='N'){
                              System.out.println("Invalid input entered");
-                         }
-                        }while(addMore=='Y');
+                         }//validation
+                        }while(addMore=='Y');//loop if wanted to add another
                         break;
 
 
                     case 2:
                         System.out.print("Please enter the staff ID :");
 
-                        String inputID = scn.nextLine();
+                        String inputID = scn.nextLine();//receive input staff id
                         for (int i = 0; i <checkStaff.size();i++) {
-                            if (inputID.equals(checkStaff.get(i).getId()) ) {
-                                ModStaff(checkStaff, i,inputID);
+                            if (inputID.equals(checkStaff.get(i).getId()) ) {//loop through the existing record until it reaches the one same as the input
+                                ModStaff(checkStaff, i,inputID);//pass in the arraylist checkStaff ,index i and input
                                 break;
                             }
                             else {
                                 System.out.println("ID is not registered.");
-                                break;
+                                break;//show error message if id doesnt exist
                             }
                         }
                         break;
                     case 3:
-                        displayStaff(checkStaff);
+                        displayStaff(checkStaff);//pass in arraylist to display
                         break;
                     case 4:
                         char check;
                         do{
-                            deleteStaff(checkStaff);
+                            deleteStaff(checkStaff);//pass in arraylist to check through the record
                             System.out.print("Do you want to continue deleting staff(Y/N)?");
                             check = scn.next().charAt(0);
                             Character.toUpperCase(check);
@@ -105,41 +105,40 @@ public class StaffDetails {
 
     public static void addNewStaff(ArrayList<Staff> addS) {
         LocalDate dateS = LocalDate.now();
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");//auto assign dateJoined
         Scanner scn = new Scanner(System.in);
         String staffID;
-        /*valStaffID.valStaffID(staffID);*/
-        int array = addS.size() - 1;
-        int unit = addS.get(array).getId().charAt(3);
-        int hundred = addS.get(array).getId().charAt(1);
-        int tenth = addS.get(array).getId().charAt(2); 
+        int array = addS.size() - 1;                                //pass value for arraylist size together with -1 since it cant be use directly
+        int unit = addS.get(array).getId().charAt(3);               //get unit 
+        int tenth = addS.get(array).getId().charAt(2);              //get tenth
+        int hundred = addS.get(array).getId().charAt(1);            //get hundredth
         int convertUnit = Character.getNumericValue(unit);          //auto generate member ID
         int convertTenth = Character.getNumericValue(tenth);
         int convertHundred = Character.getNumericValue(hundred);
 
-        convertUnit = convertUnit + 1;
+        convertUnit = convertUnit + 1;//new staff
         if(convertUnit == 10){
-            convertTenth++;
+            convertTenth++;//if unit reach 10 ,it becomes 0 and tenth +1
             convertUnit = 0;
         }
         if(convertTenth == 10){
-            convertHundred++;
+            convertHundred++;//if tenth reach 10 ,it becomes 0 and hundredth +1
             convertTenth = 0;
         }
-        staffID = "S" + convertHundred + convertTenth + convertUnit;
+        staffID = "S" + convertHundred + convertTenth + convertUnit;//start with S to show it is staff
 
         System.out.print("Please enter the Name :");
-        String staffName = scn.nextLine();
+        String staffName = scn.nextLine();//input name
 
-        String dateJoined = dateS.format(formatDate);
+        String dateJoined = dateS.format(formatDate);//auto generated the dateJoined
         
         boolean catchDouble;
         double salary=0;
         do{
             System.out.print("Please enter the Salary :");
             try{
-                salary = scn.nextDouble();
-                scn.nextLine();
+                salary = scn.nextDouble();//enter salary
+                scn.nextLine();//rewind
                 catchDouble=true;
             }catch(Exception ab){
                 catchDouble=false;
@@ -156,30 +155,26 @@ public class StaffDetails {
         do{
             System.out.print("Please set the password :");
             password = scn.nextLine();
-            if(password.length()>=19){
+            if(password.length()>=19){//password must not be more than 18 letter
                 System.out.println("Password can only have 18 characters");
                 limitPw = false;
             }
-            else if((password.equals(""))||(password.length()<6)){
-                System.out.println("Password must have at least 8 characters");
+            else if((password.equals(""))||(password.length()<6)){//make sure password less than 6
+                System.out.println("Password must have at least 6 characters");
                 limitPw = false;
             }
             else limitPw=true;
         }while(!limitPw);
                 
-        addS.add(new Staff(staffID, staffName, dateJoined, salary, password));
+        addS.add(new Staff(staffID, staffName, dateJoined, salary, password));//add new in arraylist
     }
 
     public static void ModStaff(ArrayList<Staff> modS, int i, String inputID) {
-        LocalDate memDate = LocalDate.now();
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Scanner scn = new Scanner(System.in);
         int selection=0;
         String staffName="";
-        String dateJoined = "";
-        double salary=-1.00;
+        double salary=-1.00;//declaration for those are to be modifed
         String password="";
-        String staffID= inputID;
         boolean catchInt;
         do{
             System.out.println("===================================================");
@@ -202,14 +197,14 @@ public class StaffDetails {
                 switch(selection){
                     case 1:
                         System.out.print("Please enter the Name :");
-                        staffName = scn.nextLine();
+                        staffName = scn.nextLine();//changing name
                         break;
                     case 2:
                         boolean catchDouble;
                         do{
                             System.out.print("Please enter the Salary :");
                             try{
-                                salary = scn.nextDouble();
+                                salary = scn.nextDouble();//modifying salary
                                 scn.nextLine();
                                 catchDouble=true;
                             }catch(Exception ac){
@@ -225,13 +220,13 @@ public class StaffDetails {
                         boolean limitPw;
                         do{
                             System.out.print("Please set the password :");
-                            password = scn.nextLine();
+                            password = scn.nextLine();//modifying password
                             if(password.length()>=19){
                                 System.out.println("Password can only have 18 characters");
                                 limitPw = false;
                             }
                             else if((password.equals(""))||(password.length()<6)){
-                                System.out.println("Password must have at least 8 characters");
+                                System.out.println("Password must have at least 6 characters");
                                 limitPw = false;
                             }
                             else limitPw=true;
@@ -240,9 +235,6 @@ public class StaffDetails {
                     case 4:
                         if(!staffName.equals("")){
                             modS.get(i).setName(staffName); 
-                        }
-                        if(!dateJoined.equals("")){
-                            modS.get(i).setDateJoined(dateJoined); 
                         }
                         if(!(salary == -1.00)){
                             modS.get(i).setSalary(salary); 
@@ -273,7 +265,7 @@ public class StaffDetails {
         System.out.printf("\n===================================================");
         for(int x = 0; x < staffList.size(); x++){
             System.out.printf("\n%s%-10s%s%-12s%s%-13s%s%.2f"," ",staffList.get(x).getId()," ", staffList.get(x).getName()," "
-                    , staffList.get(x).getDateJoined()," ", staffList.get(x).getSalary());
+                    , staffList.get(x).getDateJoined()," ", staffList.get(x).getSalary());//pass in the getter to display
         }
         System.out.println("\n");
     }
@@ -284,11 +276,11 @@ public class StaffDetails {
         String deleteStaff;
 
         System.out.print("Enter the staff ID wanted to delete : ");
-        deleteStaff = scn.nextLine();
+        deleteStaff = scn.nextLine();//get input of staff id to delete
         int temp = 0;
         for(int i =0;i<staffList.size();i++){
          if(staffList.get(i).getId().equals(deleteStaff)){
-             staffList.remove(i);
+             staffList.remove(i);//arraylist remove method to delete the existing record
              temp=1;
             System.out.println("Record deleted successfully !");
             }   

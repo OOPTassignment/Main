@@ -16,7 +16,7 @@ public class ProductDetails {
     public static void ProductM() {
         Scanner scn = new Scanner(System.in);
         int selection=0;
-        boolean catchInt;
+        boolean catchInt;//for the loop condition
         ArrayList<Product> checkProd = Product.getProductList();
         do{
             System.out.printf("%18s%15s\n","","Product Details");
@@ -42,10 +42,10 @@ public class ProductDetails {
                 case 1:
                     char addMore;
                     do{
-                     addProd(checkProd);
+                     addProd(checkProd);//call addProd, pass in arraylist checkProd
                      System.out.print("Do you want to add more?(Y/N)");
                      addMore=scn.next().charAt(0);
-                     Character.toUpperCase(addMore);
+                     Character.toUpperCase(addMore);//prompt to add more
                      if(!(addMore=='Y'||addMore=='N')){
                          System.out.println("Invalid input entered");
                      }
@@ -54,11 +54,10 @@ public class ProductDetails {
 
                 case 2:
                     System.out.print("Please enter the product ID :");
-
-                    char inputID = scn.next().charAt(0);
+                    char inputID = scn.next().charAt(0);//scan for product ID
                     for (int i = 0; i <checkProd.size();i++) {
                         if (inputID==(checkProd.get(i).getProductID()) ) {
-                            modProd(checkProd, i,inputID);
+                            modProd(checkProd, i,inputID);//pass in arraylist checkProd , index i , input ID into modProd
                             break;
                         }
                         else {
@@ -68,7 +67,7 @@ public class ProductDetails {
                     }
                     break;
                 case 3:
-                    dispProd(checkProd);
+                    dispProd(checkProd);//display product in the arraylist checkProd
                     break;
                 case 4:
                     char check;
@@ -76,14 +75,14 @@ public class ProductDetails {
                         delProd(checkProd);
                         System.out.print("Do you want to continue deleting product(Y/N)?");
                         check = scn.next().charAt(0);
-                        Character.toUpperCase(check);
+                        Character.toUpperCase(check);//condition to loop 
                         if(!(check!='Y'||check!='N')){
                             System.out.println("Invalid input entered");
                         }
                     }while(check=='Y');
                     break;
                 case 5:
-                    return;
+                    return;//return to manager menu
                 default:
                     System.out.println("\n");
                     break;
@@ -106,7 +105,7 @@ public class ProductDetails {
         
 
         System.out.print("Enter the Product Name :");
-        String productName= scn.nextLine();
+        String productName= scn.nextLine();//enter product name
         
         
         boolean catchDouble;
@@ -114,7 +113,7 @@ public class ProductDetails {
         do{
             System.out.print("Enter the product price for Kids :");
             try{
-                kidPrice = scn.nextDouble();
+                kidPrice = scn.nextDouble();//input product price for kids
                 scn.nextLine();
                 catchDouble=true;
             }catch(Exception ad){
@@ -130,7 +129,7 @@ public class ProductDetails {
         do{
             System.out.print("Enter the product price for Adults :");
             try{
-                adultPrice = scn.nextDouble();
+                adultPrice = scn.nextDouble();//input product price for adults
                 scn.nextLine();
                 catchDouble=true;
             }catch(Exception ae){
@@ -146,7 +145,7 @@ public class ProductDetails {
         do{
             System.out.print("Enter the product price for Elders :");
             try{
-                elderPrice = scn.nextDouble();
+                elderPrice = scn.nextDouble();//input product price for elders
                 scn.nextLine();
                 catchDouble=true;
             }catch(Exception ae){
@@ -194,14 +193,14 @@ public class ProductDetails {
                 switch(selection){
                     case 1:
                         System.out.print("Please enter the Name :");
-                        modPName = scn.nextLine();
+                        modPName = scn.nextLine();//modifying name of product
                         break;
 
                     case 2:
                         do{
                             System.out.print("Enter the modified product price for Kids :");
                             try{
-                                modKidPrice = scn.nextDouble();
+                                modKidPrice = scn.nextDouble();//modifying price for kids
                                 scn.nextLine();
                                 catchDouble=true;
                             }catch(Exception ad){
@@ -218,7 +217,7 @@ public class ProductDetails {
                         do{
                             System.out.print("Enter the modified product price for Adults :");
                             try{
-                                modAdultPrice = scn.nextDouble();
+                                modAdultPrice = scn.nextDouble();//modifying price for adults
                                 scn.nextLine();
                                 catchDouble=true;
                             }catch(Exception ae){
@@ -234,7 +233,7 @@ public class ProductDetails {
                         do{
                             System.out.print("Enter the product price for Elders :");
                             try{
-                                modElderPrice = scn.nextDouble();
+                                modElderPrice = scn.nextDouble();//modifying price for elders
                                 scn.nextLine();
                                 catchDouble=true;
                             }catch(Exception ae){
@@ -248,7 +247,7 @@ public class ProductDetails {
                         break;
                     case 5:
                         if(!modPName.equals("")){
-                                modP.get(i).setProdName(modPName); 
+                                modP.get(i).setProdName(modPName); //saving the changes from new modified input
                         }
                         if(!(modKidPrice == -1.00)){
                                 modP.get(i).setpPriceKids(modKidPrice);
@@ -276,30 +275,30 @@ public class ProductDetails {
     }
     public static void dispProd(ArrayList<Product> checkProd){
         
-        checkProd = Product.getProductList();
+        checkProd = Product.getProductList();//
         System.out.println("");  
         System.out.printf("\n%20sProduct Information\n", "");
         System.out.printf("|%-12s|%-20s|%-20s|%-20s|%-20s|","Product ID","Product Name","Price for Kids","Price for Adults","Price for Elders");
         System.out.printf("\n==================================================================================================");
         for(int x = 0; x < checkProd.size(); x++){
             System.out.printf("\n%s%-12c%s%-20s%s%20.2f%s%20.2f%s%20.2f"," ",checkProd.get(x).getProductID()," ",checkProd.get(x).getProdName()," ", checkProd.get(x).getpPriceKids()," "
-                    , checkProd.get(x).getpPriceAdults()," ", checkProd.get(x).getpPriceElders());
+                    , checkProd.get(x).getpPriceAdults()," ", checkProd.get(x).getpPriceElders());//use getter to call the product information
         }
         System.out.println("\n");
         System.out.println("\n==================================================================================================");
     }
     
     public static void delProd(ArrayList<Product> checkProd){
-        checkProd = Product.getProductList();
+        checkProd = Product.getProductList();//passing in getProductList
         Scanner scn = new Scanner(System.in);
         char deleteID;
 
         System.out.print("Enter the product ID wanted to delete : ");
-        deleteID = scn.next().charAt(0);
+        deleteID = scn.next().charAt(0);//get input for delete
         int temp = 0;
         for(int i =0;i<checkProd.size();i++){
          if(checkProd.get(i).getProductID()== deleteID){
-             checkProd.remove(i);
+             checkProd.remove(i);//remove the id from the input
              temp=1;
             System.out.println("Record deleted successfully !");
             }   
